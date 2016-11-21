@@ -8,7 +8,7 @@ import {Viz} from "d3plus-viz";
 /**
     @class Pie
     @extends Viz
-    @desc Uses the [d3 treemap layout](https://github.com/mbostock/d3/wiki/Pie-Layout) to creates SVG rectangles based on an array of data. See [this example](https://d3plus.org/examples/d3plus-hierarchy/getting-started/) for help getting started using the treemap generator.
+    @desc Uses the [d3 pie layout](https://github.com/d3/d3-shape#pies) to creates SVG arcs based on an array of data.
 */
 export default class Pie extends Viz {
 
