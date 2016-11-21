@@ -36,12 +36,16 @@ export default class Tree extends Viz {
           const ids = this._ids(d, i).slice(0, d.depth);
           return ids[ids.length - 1];
         },
-        hitArea: (d, i, s) => ({
-          width: this._labelWidths[d.depth - 1],
-          height: s.r * 2 + this._labelHeight,
-          x: -this._labelWidths[d.depth - 1] / 2,
-          y: d.children && d.depth !== this._groupBy.length ? -(s.r + this._labelHeight) : -s.r
-        }),
+        hitArea: (d, i, s) => {
+          const h = this._labelHeight,
+                w = this._labelWidths[d.depth - 1];
+          return {
+            width: this._orient === "vertical" ? w : s.r * 2 + w,
+            height: this._orient === "horizontal" ? h : s.r * 2 + h,
+            x: this._orient === "vertical" ? -w / 2 : d.children && d.depth !== this._groupBy.length ? -(s.r + w) : -s.r,
+            y: this._orient === "horizontal" ? -h / 2 : d.children && d.depth !== this._groupBy.length ? -(s.r + this._labelHeight) : -s.r
+          };
+        },
         labelBounds: (d, i, s) => {
           const h = this._labelHeight,
                 height = this._orient === "vertical" ? "height" : "width",
