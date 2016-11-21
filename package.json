@@ -27,9 +27,10 @@
     "d3-collection": "^1.0.1",
     "d3-hierarchy": "^1.0.0",
     "d3-scale": "^1.0.3",
+    "d3-shape": "^1.0.3",
     "d3plus-common": "^0.6.8",
-    "d3plus-shape": "^0.8.25",
-    "d3plus-viz": "^0.4.1"
+    "d3plus-shape": "^0.9.3",
+    "d3plus-viz": "^0.4.3"
   },
   "scripts": {
     "build": "d3plus-build",
