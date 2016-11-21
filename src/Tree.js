@@ -191,7 +191,10 @@ export default class Tree extends Viz {
 
   /**
       @memberof Tree
-      @desc If *value* is specified, sets the separation method to the specified function. If *value* is not specified, returns the current separation function.
+      @desc If *value* is specified, sets the separation accessor to the specified function. If *value* is not specified, returns the current separation accessor.
+
+From the [d3-hierarchy documentation](https://github.com/d3/d3-hierarchy#tree_separation):
+> The separation accessor is used to separate neighboring nodes. The separation function is passed two nodes a and b, and must return the desired separation. The nodes are typically siblings, though the nodes may be more distantly related if the layout decides to place such nodes adjacent.
       @param {Function} [*value*]
       @example
 function separation(a, b) {
