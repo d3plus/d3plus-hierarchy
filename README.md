@@ -12,7 +12,7 @@ Nested, hierarchical, and cluster charts built on D3
 If you use NPM, `npm install d3plus-hierarchy`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-hierarchy/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a [custom bundle using Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
-<script src="https://d3plus.org/js/d3plus-hierarchy.v0.1.full.min.js"></script>
+<script src="https://d3plus.org/js/d3plus-hierarchy.v0.2.full.min.js"></script>
 ```
 
 
@@ -56,6 +56,10 @@ Colors are assigned to each unique ID using [d3plus-color](https://github.com/d3
 ### Classes
 
 <dl>
+<dt><a href="#Donut">Donut</a> ⇐ <code><a href="#Pie">Pie</a></code></dt>
+<dd></dd>
+<dt><a href="#Pie">Pie</a> ⇐ <code>Viz</code></dt>
+<dd></dd>
 <dt><a href="#Tree">Tree</a> ⇐ <code>Viz</code></dt>
 <dd></dd>
 <dt><a href="#Treemap">Treemap</a> ⇐ <code>Viz</code></dt>
@@ -71,6 +75,102 @@ Colors are assigned to each unique ID using [d3plus-color](https://github.com/d3
 <dd></dd>
 </dl>
 
+<a name="Donut"></a>
+
+### Donut ⇐ <code>[Pie](#Pie)</code>
+**Kind**: global class  
+**Extends:** <code>[Pie](#Pie)</code>  
+<a name="new_Donut_new"></a>
+
+#### new Donut()
+Extends the Pie visualization to create a donut chart.
+
+<a name="Pie"></a>
+
+### Pie ⇐ <code>Viz</code>
+**Kind**: global class  
+**Extends:** <code>Viz</code>  
+
+* [Pie](#Pie) ⇐ <code>Viz</code>
+    * [new Pie()](#new_Pie_new)
+    * [.innerRadius([*value*])](#Pie.innerRadius)
+    * [.padAngle([*value*])](#Pie.padAngle)
+    * [.padPixel([*value*])](#Pie.padPixel)
+    * [.sort([*comparator*])](#Pie.sort)
+    * [.value([*value*])](#Pie.value)
+
+<a name="new_Pie_new"></a>
+
+#### new Pie()
+Uses the [d3 pie layout](https://github.com/d3/d3-shape#pies) to creates SVG arcs based on an array of data.
+
+<a name="Pie.innerRadius"></a>
+
+#### Pie.innerRadius([*value*])
+If *value* is specified, sets the inner radius accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current inner radius accessor.
+
+**Kind**: static method of <code>[Pie](#Pie)</code>  
+
+| Param | Type |
+| --- | --- |
+| [*value*] | <code>function</code> &#124; <code>Number</code> | 
+
+<a name="Pie.padAngle"></a>
+
+#### Pie.padAngle([*value*])
+If *value* is specified, sets the arc padding to the specified radian value and returns the current class instance. If *value* is not specified, returns the current radian padding.
+
+**Kind**: static method of <code>[Pie](#Pie)</code>  
+
+| Param | Type |
+| --- | --- |
+| [*value*] | <code>Number</code> | 
+
+<a name="Pie.padPixel"></a>
+
+#### Pie.padPixel([*value*])
+If *value* is specified, sets the arc padding to the specified pixel value and returns the current class instance. If *value* is not specified, returns the current pixel padding.
+
+**Kind**: static method of <code>[Pie](#Pie)</code>  
+
+| Param | Type |
+| --- | --- |
+| [*value*] | <code>Number</code> | 
+
+<a name="Pie.sort"></a>
+
+#### Pie.sort([*comparator*])
+If *comparator* is specified, sets the sort order for the pie slices using the specified comparator function. If *comparator* is not specified, returns the current sort order, which defaults to descending order by the associated input data's numeric value attribute.
+
+**Kind**: static method of <code>[Pie](#Pie)</code>  
+
+| Param | Type |
+| --- | --- |
+| [*comparator*] | <code>Array</code> | 
+
+**Example**  
+```js
+function comparator(a, b) {
+  return b.value - a.value;
+}
+```
+<a name="Pie.value"></a>
+
+#### Pie.value([*value*])
+If *value* is specified, sets the value accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current value accessor.
+
+**Kind**: static method of <code>[Pie](#Pie)</code>  
+
+| Param | Type |
+| --- | --- |
+| [*value*] | <code>function</code> &#124; <code>Number</code> | 
+
+**Example**  
+```js
+function value(d) {
+  return d.value;
+}
+```
 <a name="Tree"></a>
 
 ### Tree ⇐ <code>Viz</code>
@@ -101,7 +201,10 @@ If *value* is specified, sets the orientation to the specified value. If *value*
 <a name="Tree.separation"></a>
 
 #### Tree.separation([*value*])
-If *value* is specified, sets the separation method to the specified function. If *value* is not specified, returns the current separation function.
+If *value* is specified, sets the separation accessor to the specified function. If *value* is not specified, returns the current separation accessor.
+
+From the [d3-hierarchy documentation](https://github.com/d3/d3-hierarchy#tree_separation):
+> The separation accessor is used to separate neighboring nodes. The separation function is passed two nodes a and b, and must return the desired separation. The nodes are typically siblings, though the nodes may be more distantly related if the layout decides to place such nodes adjacent.
 
 **Kind**: static method of <code>[Tree](#Tree)</code>  
 
@@ -203,4 +306,4 @@ If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hiera
 
 
 
-###### <sub>Documentation generated on Thu, 17 Nov 2016 02:22:41 GMT</sub>
+###### <sub>Documentation generated on Mon, 21 Nov 2016 20:49:59 GMT</sub>
