@@ -29,7 +29,6 @@ export default class Tree extends Viz {
 
     this._shapeConfig = assign({}, this._shapeConfig, {
       Circle: {
-        fontColor: "#444",
         id: (d, i) => this._ids(d, i).join("-"),
         label: (d, i) => {
           if (this._label) return this._label(d.data, i);
@@ -65,6 +64,7 @@ export default class Tree extends Viz {
                        : d.children && d.depth !== this._groupBy.length ? "end" : "start",
         verticalAlign: d => this._orient === "vertical" ? d.depth === 1 ? "bottom" : "top" : "middle"
       },
+      fontColor: "#444",
       Path: {
         d: d => {
           const r = this._shapeConfig.Circle.r(d.data, d.i);
