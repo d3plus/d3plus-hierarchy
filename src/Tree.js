@@ -27,42 +27,45 @@ export default class Tree extends Viz {
     this._orient = "vertical";
     this._separation = (a, b) => a.parent === b.parent ? 1 : 2;
 
-    this._shapeConfig = assign({}, this._shapeConfig, {
-      Circle: {
-        id: (d, i) => this._ids(d, i).join("-"),
-        label: (d, i) => {
-          if (this._label) return this._label(d.data, i);
-          const ids = this._ids(d, i).slice(0, d.depth);
-          return ids[ids.length - 1];
-        },
-        hitArea: (d, i, s) => {
-          const h = this._labelHeight,
-                w = this._labelWidths[d.depth - 1];
-          return {
-            width: this._orient === "vertical" ? w : s.r * 2 + w,
-            height: this._orient === "horizontal" ? h : s.r * 2 + h,
-            x: this._orient === "vertical" ? -w / 2 : d.children && d.depth !== this._groupBy.length ? -(s.r + w) : -s.r,
-            y: this._orient === "horizontal" ? -h / 2 : d.children && d.depth !== this._groupBy.length ? -(s.r + this._labelHeight) : -s.r
-          };
-        },
-        labelBounds: (d, i, s) => {
-          const h = this._labelHeight,
-                height = this._orient === "vertical" ? "height" : "width",
-                w = this._labelWidths[d.depth - 1],
-                width = this._orient === "vertical" ? "width" : "height",
-                x = this._orient === "vertical" ? "x" : "y",
-                y = this._orient === "vertical" ? "y" : "x";
-          return {
-            [width]: w,
-            [height]: h,
-            [x]: -w / 2,
-            [y]: d.children && d.depth !== this._groupBy.length ? -(s.r + h) : s.r
-          };
-        },
-        textAnchor: d => this._orient === "vertical" ? "middle"
-                       : d.children && d.depth !== this._groupBy.length ? "end" : "start",
-        verticalAlign: d => this._orient === "vertical" ? d.depth === 1 ? "bottom" : "top" : "middle"
+    const nodeConfig = {
+      id: (d, i) => this._ids(d, i).join("-"),
+      label: (d, i) => {
+        if (this._label) return this._label(d.data, i);
+        const ids = this._ids(d, i).slice(0, d.depth);
+        return ids[ids.length - 1];
       },
+      hitArea: (d, i, s) => {
+        const h = this._labelHeight,
+              w = this._labelWidths[d.depth - 1];
+        return {
+          width: this._orient === "vertical" ? w : s.r * 2 + w,
+          height: this._orient === "horizontal" ? h : s.r * 2 + h,
+          x: this._orient === "vertical" ? -w / 2 : d.children && d.depth !== this._groupBy.length ? -(s.r + w) : -s.r,
+          y: this._orient === "horizontal" ? -h / 2 : d.children && d.depth !== this._groupBy.length ? -(s.r + this._labelHeight) : -s.r
+        };
+      },
+      labelBounds: (d, i, s) => {
+        const h = this._labelHeight,
+              height = this._orient === "vertical" ? "height" : "width",
+              w = this._labelWidths[d.depth - 1],
+              width = this._orient === "vertical" ? "width" : "height",
+              x = this._orient === "vertical" ? "x" : "y",
+              y = this._orient === "vertical" ? "y" : "x";
+        return {
+          [width]: w,
+          [height]: h,
+          [x]: -w / 2,
+          [y]: d.children && d.depth !== this._groupBy.length ? -(s.r + h) : s.r
+        };
+      },
+      textAnchor: d => this._orient === "vertical" ? "middle"
+                     : d.children && d.depth !== this._groupBy.length ? "end" : "start",
+      verticalAlign: d => this._orient === "vertical" ? d.depth === 1 ? "bottom" : "top" : "middle"
+    };
+
+    this._shape = constant("Circle");
+    this._shapeConfig = assign({}, this._shapeConfig, {
+      Circle: nodeConfig,
       fontColor: "#444",
       Path: {
         d: d => {
@@ -81,7 +84,9 @@ export default class Tree extends Viz {
         stroke: "#ccc",
         strokeWidth: 1
       },
-      r: constant(5)
+      r: constant(5),
+      width: constant(10),
+      height: constant(10)
     });
 
     this._tree = tree();
