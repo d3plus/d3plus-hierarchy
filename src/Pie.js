@@ -1,7 +1,7 @@
 import {min} from "d3-array";
 import {arc, pie} from "d3-shape";
 
-import {accessor, constant, elem} from "d3plus-common";
+import {accessor, assign, constant, elem} from "d3plus-common";
 import {Path} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
@@ -21,7 +21,7 @@ export default class Pie extends Viz {
 
     super();
 
-    this._shapeConfig = Object.assign({}, this._shapeConfig, {
+    this._shapeConfig = assign({}, this._shapeConfig, {
       Path: {
         id: d => this._ids(d).join("-"),
         x: 0,

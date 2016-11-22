@@ -1,7 +1,7 @@
 import {nest} from "d3-collection";
 import {hierarchy, treemap, treemapSquarify} from "d3-hierarchy";
 
-import {accessor, constant, elem, merge} from "d3plus-common";
+import {accessor, assign, constant, elem, merge} from "d3plus-common";
 import {Rect} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
@@ -22,7 +22,7 @@ export default class Treemap extends Viz {
     super();
 
     this._padding = 1;
-    this._shapeConfig = Object.assign({}, this._shapeConfig, {
+    this._shapeConfig = assign({}, this._shapeConfig, {
       Rect: {
         fontResize: true,
         height: d => d.y1 - d.y0,

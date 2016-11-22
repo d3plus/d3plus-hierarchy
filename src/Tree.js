@@ -2,7 +2,7 @@ import {extent, min, max} from "d3-array";
 import {hierarchy, tree} from "d3-hierarchy";
 import {scaleLinear} from "d3-scale";
 
-import {constant, elem, merge} from "d3plus-common";
+import {assign, constant, elem, merge} from "d3plus-common";
 import {Circle, Path} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
@@ -27,7 +27,7 @@ export default class Tree extends Viz {
     this._orient = "vertical";
     this._separation = (a, b) => a.parent === b.parent ? 1 : 2;
 
-    this._shapeConfig = Object.assign({}, this._shapeConfig, {
+    this._shapeConfig = assign({}, this._shapeConfig, {
       Circle: {
         fontColor: "#444",
         id: (d, i) => this._ids(d, i).join("-"),
