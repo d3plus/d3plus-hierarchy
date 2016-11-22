@@ -59,7 +59,6 @@ export default class Tree extends Viz {
             [y]: d.children && d.depth !== this._groupBy.length ? -(s.r + h) : s.r
           };
         },
-        r: constant(5),
         textAnchor: d => this._orient === "vertical" ? "middle"
                        : d.children && d.depth !== this._groupBy.length ? "end" : "start",
         verticalAlign: d => this._orient === "vertical" ? d.depth === 1 ? "bottom" : "top" : "middle"
@@ -67,7 +66,8 @@ export default class Tree extends Viz {
       fontColor: "#444",
       Path: {
         d: d => {
-          const r = this._shapeConfig.Circle.r(d.data, d.i);
+          let r = this._shapeConfig.Circle.r || this._shapeConfig.r;
+          if (typeof r === "function") r = r(d.data, d.i);
           const px = d.parent.x - d.x + (this._orient === "vertical" ? 0 : r),
                 py = d.parent.y - d.y + (this._orient === "vertical" ? r : 0),
                 x = this._orient === "vertical" ? 0 : -r,
@@ -80,7 +80,8 @@ export default class Tree extends Viz {
         id: (d, i) => this._ids(d, i).join("-"),
         stroke: "#ccc",
         strokeWidth: 1
-      }
+      },
+      r: constant(5)
     });
 
     this._tree = tree();
@@ -129,7 +130,8 @@ export default class Tree extends Viz {
       d.i = i;
     });
 
-    const r = this._shapeConfig.Circle.r;
+    let r = this._shapeConfig.Circle.r || this._shapeConfig.r;
+    if (typeof r !== "function") r = constant(r);
     const rBufferRoot = max(treeData, d => d.depth === 1 ? r(d.data, d.i) : 0);
     const rBufferEnd = max(treeData, d => d.children ? 0 : r(d.data, d.i));
 
