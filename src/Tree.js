@@ -35,28 +35,34 @@ export default class Tree extends Viz {
         return ids[ids.length - 1];
       },
       hitArea: (d, i, s) => {
+
         const h = this._labelHeight,
               w = this._labelWidths[d.depth - 1];
+
         return {
           width: this._orient === "vertical" ? w : s.r * 2 + w,
           height: this._orient === "horizontal" ? h : s.r * 2 + h,
           x: this._orient === "vertical" ? -w / 2 : d.children && d.depth !== this._groupBy.length ? -(s.r + w) : -s.r,
           y: this._orient === "horizontal" ? -h / 2 : d.children && d.depth !== this._groupBy.length ? -(s.r + this._labelHeight) : -s.r
         };
+
       },
       labelBounds: (d, i, s) => {
+
         const h = this._labelHeight,
               height = this._orient === "vertical" ? "height" : "width",
               w = this._labelWidths[d.depth - 1],
               width = this._orient === "vertical" ? "width" : "height",
               x = this._orient === "vertical" ? "x" : "y",
               y = this._orient === "vertical" ? "y" : "x";
+
         return {
           [width]: w,
           [height]: h,
           [x]: -w / 2,
           [y]: d.children && d.depth !== this._groupBy.length ? -(s.r + h) : s.r
         };
+
       },
       textAnchor: d => this._orient === "vertical" ? "middle"
                      : d.children && d.depth !== this._groupBy.length ? "end" : "start",
