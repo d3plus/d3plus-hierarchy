@@ -49,8 +49,8 @@ Colors are assigned to each unique ID using [d3plus-color](https://github.com/d3
 
 ### More Examples
 
- * [Using a Custom Color Accessor](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)<sup> ***New***</sup>
- * [Rendering into a Specific Page Element](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)<sup> ***New***</sup>
+ * [Using a Custom Color Accessor](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
+ * [Rendering into a Specific Page Element](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
 
 ## API Reference
 ### Classes
@@ -306,4 +306,4 @@ If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hiera
 
 
 
-###### <sub>Documentation generated on Tue, 22 Nov 2016 14:21:53 GMT</sub>
+###### <sub>Documentation generated on Thu, 01 Dec 2016 18:46:21 GMT</sub>
