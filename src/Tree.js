@@ -75,15 +75,20 @@ export default class Tree extends Viz {
       fontColor: "#444",
       Path: {
         d: d => {
+
           let r = this._shapeConfig.Circle.r || this._shapeConfig.r;
+
           if (typeof r === "function") r = r(d.data, d.i);
+
           const px = d.parent.x - d.x + (this._orient === "vertical" ? 0 : r),
                 py = d.parent.y - d.y + (this._orient === "vertical" ? r : 0),
                 x = this._orient === "vertical" ? 0 : -r,
                 y = this._orient === "vertical" ? -r : 0;
+
           return this._orient === "vertical"
                ? `M${x},${y}C${x},${(y + py) / 2} ${px},${(y + py) / 2} ${px},${py}`
                : `M${x},${y}C${(x + px) / 2},${y} ${(x + px) / 2},${py} ${px},${py}`;
+
         },
         fill: "none",
         id: (d, i) => this._ids(d, i).join("-"),
