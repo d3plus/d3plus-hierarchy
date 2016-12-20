@@ -306,4 +306,4 @@ If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hiera
 
 
 
-###### <sub>Documentation generated on Fri, 09 Dec 2016 21:39:22 GMT</sub>
+###### <sub>Documentation generated on Tue, 20 Dec 2016 20:23:18 GMT</sub>
