@@ -12,7 +12,7 @@ Nested, hierarchical, and cluster charts built on D3
 If you use NPM, `npm install d3plus-hierarchy`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-hierarchy/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a [custom bundle using Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
-<script src="https://d3plus.org/js/d3plus-hierarchy.v0.2.full.min.js"></script>
+<script src="https://d3plus.org/js/d3plus-hierarchy.v0.3.full.min.js"></script>
 ```
 
 
@@ -306,4 +306,4 @@ If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hiera
 
 
 
-###### <sub>Documentation generated on Tue, 20 Dec 2016 20:23:18 GMT</sub>
+###### <sub>Documentation generated on Sat, 28 Jan 2017 18:16:50 GMT</sub>
