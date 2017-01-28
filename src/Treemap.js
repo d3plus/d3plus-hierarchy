@@ -47,12 +47,12 @@ export default class Treemap extends Viz {
   }
 
   /**
-      Extends the render behavior of the abstract Viz class.
+      Extends the draw behavior of the abstract Viz class.
       @private
   */
-  render(callback) {
+  _draw(callback) {
 
-    super.render(callback);
+    super._draw(callback);
 
     let nestedData = nest();
     for (let i = 0; i <= this._drawDepth; i++) nestedData.key(this._groupBy[i]);

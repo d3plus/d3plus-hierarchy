@@ -23,7 +23,9 @@ export default class Pie extends Viz {
 
     this._shapeConfig = assign({}, this._shapeConfig, {
       Path: {
+        fontResize: true,
         id: d => this._ids(d).join("-"),
+        label: d => this._drawLabel(d.data, d.i),
         x: 0,
         y: 0
       }
@@ -37,12 +39,12 @@ export default class Pie extends Viz {
   }
 
   /**
-      Extends the render behavior of the abstract Viz class.
+      Extends the draw behavior of the abstract Viz class.
       @private
   */
-  render(callback) {
+  _draw(callback) {
 
-    super.render(callback);
+    super._draw(callback);
 
     const height = this._height - this._margin.top - this._margin.bottom,
           width = this._width - this._margin.left - this._margin.right;

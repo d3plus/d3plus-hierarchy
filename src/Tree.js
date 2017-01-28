@@ -105,12 +105,12 @@ export default class Tree extends Viz {
   }
 
   /**
-      Extends the render behavior of the abstract Viz class.
+      Extends the draw behavior of the abstract Viz class.
       @private
   */
-  render(callback) {
+  _draw(callback) {
 
-    super.render(callback);
+    super._draw(callback);
 
     const height = this._orient === "vertical"
                  ? this._height - this._margin.top - this._margin.bottom
