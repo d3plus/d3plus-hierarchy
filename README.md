@@ -79,7 +79,7 @@ Colors are assigned to each unique ID using [d3plus-color](https://github.com/d3
 
 ### Donut ⇐ <code>[Pie](#Pie)</code>
 **Kind**: global class  
-**Extends:** <code>[Pie](#Pie)</code>  
+**Extends**: <code>[Pie](#Pie)</code>  
 <a name="new_Donut_new"></a>
 
 #### new Donut()
@@ -89,7 +89,7 @@ Extends the Pie visualization to create a donut chart.
 
 ### Pie ⇐ <code>Viz</code>
 **Kind**: global class  
-**Extends:** <code>Viz</code>  
+**Extends**: <code>Viz</code>  
 
 * [Pie](#Pie) ⇐ <code>Viz</code>
     * [new Pie()](#new_Pie_new)
@@ -175,7 +175,7 @@ function value(d) {
 
 ### Tree ⇐ <code>Viz</code>
 **Kind**: global class  
-**Extends:** <code>Viz</code>  
+**Extends**: <code>Viz</code>  
 
 * [Tree](#Tree) ⇐ <code>Viz</code>
     * [new Tree()](#new_Tree_new)
@@ -222,7 +222,7 @@ function separation(a, b) {
 
 ### Treemap ⇐ <code>Viz</code>
 **Kind**: global class  
-**Extends:** <code>Viz</code>  
+**Extends**: <code>Viz</code>  
 
 * [Treemap](#Treemap) ⇐ <code>Viz</code>
     * [new Treemap()](#new_Treemap_new)
@@ -306,4 +306,4 @@ If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hiera
 
 
 
-###### <sub>Documentation generated on Sat, 28 Jan 2017 20:31:48 GMT</sub>
+###### <sub>Documentation generated on Mon, 13 Mar 2017 20:11:47 GMT</sub>
