@@ -21,11 +21,13 @@ export default class Pie extends Viz {
 
     super();
 
-    this._shapeConfig = assign({}, this._shapeConfig, {
+    this._shapeConfig = assign(this._shapeConfig, {
       Path: {
-        fontResize: true,
         id: d => this._ids(d).join("-"),
         label: d => this._drawLabel(d.data, d.i),
+        labelConfig: {
+          fontResize: true
+        },
         x: 0,
         y: 0
       }

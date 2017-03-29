@@ -34,6 +34,11 @@ export default class Tree extends Viz {
         const ids = this._ids(d, i).slice(0, d.depth);
         return ids[ids.length - 1];
       },
+      labelConfig: {
+        textAnchor: d => this._orient === "vertical" ? "middle"
+                       : d.data.children && d.data.depth !== this._groupBy.length ? "end" : "start",
+        verticalAlign: d => this._orient === "vertical" ? d.data.depth === 1 ? "bottom" : "top" : "middle"
+      },
       hitArea: (d, i, s) => {
 
         const h = this._labelHeight,
@@ -63,16 +68,15 @@ export default class Tree extends Viz {
           [y]: d.children && d.depth !== this._groupBy.length ? -(s.r + h) : s.r
         };
 
-      },
-      textAnchor: d => this._orient === "vertical" ? "middle"
-                     : d.children && d.depth !== this._groupBy.length ? "end" : "start",
-      verticalAlign: d => this._orient === "vertical" ? d.depth === 1 ? "bottom" : "top" : "middle"
+      }
     };
 
     this._shape = constant("Circle");
-    this._shapeConfig = assign({}, this._shapeConfig, {
+    this._shapeConfig = assign(this._shapeConfig, {
       Circle: nodeConfig,
-      fontColor: "#444",
+      labelConfig: {
+        fontColor: "#444"
+      },
       Path: {
         d: d => {
 

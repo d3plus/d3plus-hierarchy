@@ -23,7 +23,11 @@ export default class Treemap extends Viz {
 
     this._padding = 1;
     this._shapeConfig = assign({}, this._shapeConfig, {
-      fontResize: true,
+      labelConfig: {
+        fontResize: true,
+        textAnchor: d => d.l ? "middle" : "start",
+        verticalAlign: d => d.l ? "bottom" : "top"
+      },
       Rect: {
         height: d => d.y1 - d.y0,
         labelBounds: (d, i, s) => {
@@ -35,9 +39,7 @@ export default class Treemap extends Viz {
           ];
         },
         width: d => d.x1 - d.x0
-      },
-      textAnchor: ["start", "middle"],
-      verticalAlign: ["top", "bottom"]
+      }
     });
     this._sort = (a, b) => b.value - a.value;
     this._sum = accessor("value");
