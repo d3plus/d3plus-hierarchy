@@ -113,7 +113,7 @@ If *value* is specified, sets the inner radius accessor to the specified functio
 
 | Param | Type |
 | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>Number</code> | 
+| [*value*] | <code>function</code> \| <code>Number</code> | 
 
 <a name="Pie.padAngle"></a>
 
@@ -163,7 +163,7 @@ If *value* is specified, sets the value accessor to the specified function or nu
 
 | Param | Type |
 | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>Number</code> | 
+| [*value*] | <code>function</code> \| <code>Number</code> | 
 
 **Example**  
 ```js
@@ -245,7 +245,7 @@ If *value* is specified, sets the inner and outer padding accessor to the specif
 
 | Param | Type |
 | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>Number</code> | 
+| [*value*] | <code>function</code> \| <code>Number</code> | 
 
 <a name="Treemap.sort"></a>
 
@@ -273,7 +273,7 @@ If *value* is specified, sets the sum accessor to the specified function or numb
 
 | Param | Type |
 | --- | --- |
-| [*value*] | <code>function</code> &#124; <code>Number</code> | 
+| [*value*] | <code>function</code> \| <code>Number</code> | 
 
 **Example**  
 ```js
@@ -306,4 +306,4 @@ If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hiera
 
 
 
-###### <sub>Documentation generated on Mon, 13 Mar 2017 20:11:47 GMT</sub>
+###### <sub>Documentation generated on Wed, 29 Mar 2017 00:07:12 GMT</sub>
