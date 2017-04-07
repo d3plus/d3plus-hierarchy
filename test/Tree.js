@@ -1,14 +1,10 @@
-import {test} from "tape";
+import zora from "zora";
 import {default as Tree} from "../src/Tree.js";
 
-test("Tree", assert => {
+export default zora()
+  .test("Tree", function *(assert) {
 
-  new Tree()
-    .render(() => {
+    yield cb => new Tree().render(cb);
+    assert.ok(true, "function success");
 
-      assert.true(true, "function success");
-      assert.end();
-
-    });
-
-});
+  });
