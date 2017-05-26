@@ -273,4 +273,4 @@ This is a global function.
 
 ---
 
-###### <sub>Documentation generated on Wed, 24 May 2017 20:11:14 GMT</sub>
+###### <sub>Documentation generated on Fri, 26 May 2017 15:25:42 GMT</sub>
