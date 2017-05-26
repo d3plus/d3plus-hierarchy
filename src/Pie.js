@@ -1,7 +1,7 @@
 import {min} from "d3-array";
 import {arc, pie} from "d3-shape";
 
-import {accessor, assign, constant, elem} from "d3plus-common";
+import {accessor, assign, configPrep, constant, elem} from "d3plus-common";
 import {Path} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
@@ -77,7 +77,7 @@ export default class Pie extends Viz {
         enter: {transform},
         update: {transform}
       }).node())
-      .config(this._shapeConfigPrep("Path"))
+      .config(configPrep.bind(this)(this._shapeConfig, "shape", "Path"))
       .render());
 
     return this;

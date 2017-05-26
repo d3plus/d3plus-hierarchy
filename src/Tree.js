@@ -2,7 +2,7 @@ import {extent, min, max} from "d3-array";
 import {hierarchy, tree} from "d3-hierarchy";
 import {scaleLinear} from "d3-scale";
 
-import {assign, constant, elem, merge} from "d3plus-common";
+import {assign, configPrep, constant, elem, merge} from "d3plus-common";
 import {Circle, Path} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
@@ -187,13 +187,13 @@ export default class Tree extends Viz {
     this._shapes.push(new Path()
       .data(treeData.filter(d => d.depth > 1))
       .select(elem("g.d3plus-Tree-Links", elemObject).node())
-      .config(this._shapeConfigPrep("Path"))
+      .config(configPrep.bind(this)(this._shapeConfig, "shape", "Path"))
       .render());
 
     this._shapes.push(new Circle()
       .data(treeData)
       .select(elem("g.d3plus-Tree-Shapes", elemObject).node())
-      .config(this._shapeConfigPrep("Circle"))
+      .config(configPrep.bind(this)(this._shapeConfig, "shape", "Circle"))
       .render());
 
     return this;
