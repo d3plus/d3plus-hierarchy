@@ -23,13 +23,9 @@ export default class Pie extends Viz {
 
     this._shapeConfig = assign(this._shapeConfig, {
       Path: {
-        id: d => this._ids(d).join("-"),
-        label: d => this._drawLabel(d.data, d.i),
         labelConfig: {
           fontResize: true
-        },
-        x: 0,
-        y: 0
+        }
       }
     });
     this._innerRadius = 0;
@@ -77,6 +73,11 @@ export default class Pie extends Viz {
         enter: {transform},
         update: {transform}
       }).node())
+      .config({
+        id: d => this._ids(d).join("-"),
+        x: 0,
+        y: 0
+      })
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Path"))
       .render());
 

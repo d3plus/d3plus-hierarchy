@@ -24,21 +24,7 @@ export default class Treemap extends Viz {
     this._padding = 1;
     this._shapeConfig = assign({}, this._shapeConfig, {
       labelConfig: {
-        fontResize: true,
-        textAnchor: d => d.l ? "middle" : "start",
-        verticalAlign: d => d.l ? "bottom" : "top"
-      },
-      Rect: {
-        height: d => d.y1 - d.y0,
-        labelBounds: (d, i, s) => {
-          const h = s.height;
-          const sh = Math.min(50, h * 0.25);
-          return [
-            {width: s.width, height: h - sh, x: -s.width / 2, y: -h / 2},
-            {width: s.width, height: sh, x: -s.width / 2, y: h / 2 - sh}
-          ];
-        },
-        width: d => d.x1 - d.x0
+        fontResize: true
       }
     });
     this._sort = (a, b) => b.value - a.value;
@@ -105,6 +91,22 @@ export default class Treemap extends Viz {
         enter: {transform},
         update: {transform}
       }).node())
+      .config({
+        height: d => d.y1 - d.y0,
+        labelBounds: (d, i, s) => {
+          const h = s.height;
+          const sh = Math.min(50, h * 0.25);
+          return [
+            {width: s.width, height: h - sh, x: -s.width / 2, y: -h / 2},
+            {width: s.width, height: sh, x: -s.width / 2, y: h / 2 - sh}
+          ];
+        },
+        labelConfig: {
+          textAnchor: d => d.l ? "middle" : "start",
+          verticalAlign: d => d.l ? "bottom" : "top"
+        },
+        width: d => d.x1 - d.x0
+      })
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Rect"))
       .render());
 
