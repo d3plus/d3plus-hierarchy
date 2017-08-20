@@ -30,7 +30,7 @@
     "d3-shape": "^1.0.3",
     "d3plus-common": "^0.6.21",
     "d3plus-shape": "^0.13.2",
-    "d3plus-viz": "^0.9.4"
+    "d3plus-viz": "^0.10.0"
   },
   "scripts": {
     "build": "d3plus-build",
