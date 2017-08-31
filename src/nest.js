@@ -2,7 +2,7 @@ import {nest} from "d3-collection";
 
 /**
     @function nest
-    Extends the base behavior of d3.nest to allow for multiple depth levels.
+    @summary Extends the base behavior of d3.nest to allow for multiple depth levels.
     @param {Array} *data* The data array to be nested.
     @param {Array} *keys* An array of key accessors that signify each nest level.
 */
