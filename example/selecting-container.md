@@ -1,7 +1,7 @@
 [width]: 500
 [height]: 200
 
-# Rendering into a Specific Page Element
+# Rendering into a Specific DOM Container
 
 By default, d3plus will render visualizations in a new SVG element appended to the end of page body. This is great for quick tests and examples, but in most cases there will be a specific container on the page that will house the visualization, like so:
 
@@ -18,7 +18,7 @@ This is usually accompanied by some CSS that gives the element specific position
 }
 ```
 
-D3plus 1.x used a method called "container" in order to specify where to draw a visualization. In 2.0, this has been switched to [.select( )](https://github.com/d3plus/d3plus-viz#Viz.select), which is more in line with the base D3 nomenclature of selecting page elements. The [.select( )](https://github.com/d3plus/d3plus-viz#Viz.select) method accepts anything that the normal [d3-selection](https://github.com/d3/d3-selection#selecting-elements) would.
+D3plus 1.x used a method called "container" in order to specify where to draw a visualization. In 2.0, this has been switched to [.select( )](http://d3plus.org/docs/#Viz.select), which is more in line with the base D3 nomenclature of selecting page elements. The [.select( )](http://d3plus.org/docs/#Viz.select) method accepts anything that the normal [d3-selection](https://github.com/d3/d3-selection#selecting-elements) would.
 
 ```js
 var data = [

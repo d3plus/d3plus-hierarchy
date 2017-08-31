@@ -1,6 +1,6 @@
-# Getting Started
+# Simple Tree Map
 
-Creating a tree map using D3plus is super simple. Given an array of data objects that looks something like this:
+Creating a tree map using d3plus is super simple. Given an array of data objects that looks something like this:
 
 ```js
 var data = [
@@ -12,7 +12,7 @@ var data = [
 ];
 ```
 
-Only a few lines of code are needed to transform it into an interactive tree map:
+Only a few lines of code are needed to transform it into an interactive [TreeMap](http://d3plus.org/docs/#Treemap):
 
 ```js
 new d3plus.Treemap()
@@ -21,4 +21,4 @@ new d3plus.Treemap()
   .render();
 ```
 
-Colors are assigned to each unique ID using [d3plus-color](https://github.com/d3plus/d3plus-color#assign), and the rectangles are created using the [d3plus-shape](https://github.com/d3plus/d3plus-shape) module.
+Colors are assigned to each unique ID using the color [assign](http://d3plus.org/docs/#assign) function, and the rectangles are created using the [Rect](http://d3plus.org/docs/#Rect) class.

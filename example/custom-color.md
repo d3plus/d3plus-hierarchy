@@ -1,6 +1,6 @@
-# Using a Custom Color Accessor
+# Defining Custom Colors for a Visualization
 
-Let's take our [Getting Started]() example and color the rectangles by their parent groups.
+Let's take our [Getting Started](http://d3plus.org/examples/d3plus-hierarchy/getting-started/) example and color the rectangles by their parent groups.
 
 ```js
 var data = [
@@ -12,7 +12,7 @@ var data = [
 ];
 ```
 
-Given the new `"color"` variable present in each data point, we can tell the [treemap](https://github.com/d3plus/d3plus-text#Treemap) instance to use our specific color for each rectangle's fill attribute. All methods that the [Rect](https://github.com/d3plus/d3plus-shape#Rect) class makes available are accessible via the [shapeConfig](https://github.com/d3plus/d3plus-viz#Viz.shapeConfig) method:
+Given the new `"color"` variable present in each data point, we can tell the [TreeMap](http://d3plus.org/docs/#Treemap) class to use our specific color for each rectangle's fill attribute. All of methods that the [Rect](http://d3plus.org/docs/#Rect) class makes available are accessible via the [.shapeConfig( )](http://d3plus.org/docs/#Viz.shapeConfig) method:
 
 ```js
 new d3plus.Treemap()
