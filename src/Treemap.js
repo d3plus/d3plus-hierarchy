@@ -120,9 +120,7 @@ export default class Treemap extends Viz {
       @param {Function|Number} [*value*]
   */
   padding(_) {
-    return arguments.length
-         ? (this._padding = typeof _ === "function" ? _ : constant(_), this)
-         : this._padding;
+    return arguments.length ? (this._padding = typeof _ === "function" ? _ : constant(_), this) : this._padding;
   }
 
   /**
@@ -135,9 +133,7 @@ function comparator(a, b) {
 }
   */
   sort(_) {
-    return arguments.length
-         ? (this._sort = _, this)
-         : this._sort;
+    return arguments.length ? (this._sort = _, this) : this._sort;
   }
 
   /**
@@ -150,9 +146,7 @@ function sum(d) {
 }
   */
   sum(_) {
-    return arguments.length
-         ? (this._sum = typeof _ === "function" ? _ : constant(_), this)
-         : this._sum;
+    return arguments.length ? (this._sum = typeof _ === "function" ? _ : constant(_), this) : this._sum;
   }
 
   /**
@@ -161,9 +155,7 @@ function sum(d) {
       @param {Function} [*value*]
   */
   tile(_) {
-    return arguments.length
-         ? (this._tile = _, this)
-         : this._tile;
+    return arguments.length ? (this._tile = _, this) : this._tile;
   }
 
 }

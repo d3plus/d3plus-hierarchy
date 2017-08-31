@@ -55,14 +55,14 @@ export default class Tree extends Viz {
     super._draw(callback);
 
     const height = this._orient === "vertical"
-                 ? this._height - this._margin.top - this._margin.bottom
-                 : this._width - this._margin.left - this._margin.right,
+            ? this._height - this._margin.top - this._margin.bottom
+            : this._width - this._margin.left - this._margin.right,
           left = this._orient === "vertical" ? "left" : "top",
           that = this,
           transform = `translate(${this._margin.left}, ${this._margin.top})`,
           width = this._orient === "horizontal"
-                ? this._height - this._margin.top - this._margin.bottom
-                : this._width - this._margin.left - this._margin.right;
+            ? this._height - this._margin.top - this._margin.bottom
+            : this._width - this._margin.left - this._margin.right;
 
     const treeData = this._tree
       .separation(this._separation)
@@ -104,8 +104,7 @@ export default class Tree extends Viz {
         const next = i < d.values.length - 1 ? d.values[i + 1].x : width + this._margin[left],
               prev = i ? d.values[i - 1].x : this._margin[left];
         return min([num, next - v.x, v.x - prev]);
-      }, width)
-    );
+      }, width));
 
     const yScale = scaleLinear()
       .domain(yExtent)
@@ -139,8 +138,8 @@ export default class Tree extends Viz {
                 y = this._orient === "vertical" ? -r : 0;
 
           return this._orient === "vertical"
-               ? `M${x},${y}C${x},${(y + py) / 2} ${px},${(y + py) / 2} ${px},${py}`
-               : `M${x},${y}C${(x + px) / 2},${y} ${(x + px) / 2},${py} ${px},${py}`;
+            ? `M${x},${y}C${x},${(y + py) / 2} ${px},${(y + py) / 2} ${px},${py}`
+            : `M${x},${y}C${(x + px) / 2},${y} ${(x + px) / 2},${py} ${px},${py}`;
 
         },
         id: (d, i) => this._ids(d, i).join("-")
@@ -160,7 +159,7 @@ export default class Tree extends Viz {
         },
         labelConfig: {
           textAnchor: d => this._orient === "vertical" ? "middle"
-                         : d.data.children && d.data.depth !== this._groupBy.length ? "end" : "start",
+            : d.data.children && d.data.depth !== this._groupBy.length ? "end" : "start",
           verticalAlign: d => this._orient === "vertical" ? d.data.depth === 1 ? "bottom" : "top" : "middle"
         },
         hitArea: (d, i, s) => {
@@ -206,9 +205,7 @@ export default class Tree extends Viz {
       @param {String} [*value* = "vertical"] Accepts either "vertical" or "horizontal".
   */
   orient(_) {
-    return arguments.length
-         ? (this._orient = _, this)
-         : this._orient;
+    return arguments.length ? (this._orient = _, this) : this._orient;
   }
 
   /**
@@ -224,9 +221,7 @@ function separation(a, b) {
 }
   */
   separation(_) {
-    return arguments.length
-         ? (this._separation = _, this)
-         : this._separation;
+    return arguments.length ? (this._separation = _, this) : this._separation;
   }
 
 }

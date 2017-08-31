@@ -91,9 +91,7 @@ export default class Pie extends Viz {
       @param {Function|Number} [*value*]
   */
   innerRadius(_) {
-    return arguments.length
-         ? (this._innerRadius = _, this)
-         : this._innerRadius;
+    return arguments.length ? (this._innerRadius = _, this) : this._innerRadius;
   }
 
   /**
@@ -102,9 +100,7 @@ export default class Pie extends Viz {
       @param {Number} [*value*]
   */
   padAngle(_) {
-    return arguments.length
-         ? (this._padAngle = _, this)
-         : this._padAngle;
+    return arguments.length ? (this._padAngle = _, this) : this._padAngle;
   }
 
   /**
@@ -113,9 +109,7 @@ export default class Pie extends Viz {
       @param {Number} [*value*]
   */
   padPixel(_) {
-    return arguments.length
-         ? (this._padPixel = _, this)
-         : this._padPixel;
+    return arguments.length ? (this._padPixel = _, this) : this._padPixel;
   }
 
   /**
@@ -128,9 +122,7 @@ function comparator(a, b) {
 }
   */
   sort(_) {
-    return arguments.length
-         ? (this._sort = _, this)
-         : this._sort;
+    return arguments.length ? (this._sort = _, this) : this._sort;
   }
 
   /**
@@ -143,9 +135,7 @@ function value(d) {
 }
   */
   value(_) {
-    return arguments.length
-         ? (this._value = typeof _ === "function" ? _ : constant(_), this)
-         : this._value;
+    return arguments.length ? (this._value = typeof _ === "function" ? _ : constant(_), this) : this._value;
   }
 
 }
