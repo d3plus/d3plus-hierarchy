@@ -46,8 +46,8 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
- * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)<sup> ***New***</sup>
- * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)<sup> ***New***</sup>
+ * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
+ * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
 
 ## API Reference
 
@@ -291,4 +291,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Thu, 31 Aug 2017 17:42:13 GMT</sub>
+###### <sub>Documentation generated on Tue, 12 Sep 2017 20:28:34 GMT</sub>
