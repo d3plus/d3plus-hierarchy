@@ -46,18 +46,20 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
- * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
+ * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)<sup> ***New***</sup>
+ * [Custom Mouse Events](http://d3plus.org/examples/d3plus-hierarchy/mouse-events/)
  * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
+ * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
 
 ## API Reference
 
-##### Classes
+##### 
 * [Donut](#Donut)
 * [Pie](#Pie)
 * [Tree](#Tree)
 * [Treemap](#Treemap)
 
-##### Functions
+##### 
 * [nest](#nest) - Extends the base behavior of d3.nest to allow for multiple depth levels.
 
 ---
@@ -291,4 +293,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Tue, 12 Sep 2017 20:28:34 GMT</sub>
+###### <sub>Documentation generated on Thu, 21 Dec 2017 22:19:37 GMT</sub>
