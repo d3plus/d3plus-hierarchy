@@ -18,6 +18,10 @@ Given the new `"color"` variable present in each data point, we can tell the [Tr
 new d3plus.Treemap()
   .data(data)
   .groupBy(["parent", "id"])
-  .shapeConfig({fill: function(d) { return d.color; }})
+  .shapeConfig({
+    fill: function(d) {
+      return d.color;
+    }
+  })
   .render();
 ```
