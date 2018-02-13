@@ -46,10 +46,11 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
- * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)<sup> ***New***</sup>
+ * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)<sup> ***New***</sup>
+ * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)
  * [Custom Mouse Events](http://d3plus.org/examples/d3plus-hierarchy/mouse-events/)
  * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
- * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
+ * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)<sup> ***New***</sup>
 
 ## API Reference
 
@@ -293,4 +294,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Thu, 21 Dec 2017 22:19:37 GMT</sub>
+###### <sub>Documentation generated on Tue, 13 Feb 2018 17:25:02 GMT</sub>
