@@ -28,7 +28,7 @@
     "d3-hierarchy": "^1.0.0",
     "d3-scale": "^2.0.0",
     "d3-shape": "^1.0.3",
-    "d3plus-common": "^0.6.29",
+    "d3plus-common": "^0.6.33",
     "d3plus-shape": "^0.13.16",
     "d3plus-viz": "^0.10.14"
   },
