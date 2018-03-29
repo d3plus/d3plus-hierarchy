@@ -159,7 +159,7 @@ export default class Tree extends Viz {
         },
         labelConfig: {
           textAnchor: d => this._orient === "vertical" ? "middle"
-            : d.data.children && d.data.depth !== this._groupBy.length ? "end" : "start",
+          : d.data.children && d.data.depth !== this._groupBy.length ? "end" : "start",
           verticalAlign: d => this._orient === "vertical" ? d.data.depth === 1 ? "bottom" : "top" : "middle"
         },
         hitArea: (d, i, s) => {
