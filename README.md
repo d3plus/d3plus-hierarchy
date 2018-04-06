@@ -9,7 +9,7 @@ Nested, hierarchical, and cluster charts built on D3
 If you use NPM, run `npm install d3plus-hierarchy --save`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-hierarchy/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
-<script src="https://d3plus.org/js/d3plus-hierarchy.v0.4.full.min.js"></script>
+<script src="https://d3plus.org/js/d3plus-hierarchy.v0.5.full.min.js"></script>
 ```
 
 
@@ -33,6 +33,7 @@ Only a few lines of code are needed to transform it into an interactive [TreeMap
 new d3plus.Treemap()
   .data(data)
   .groupBy(["parent", "id"])
+  .sum("value")
   .render();
 ```
 
@@ -46,11 +47,12 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
- * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)
- * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)
- * [Custom Mouse Events](http://d3plus.org/examples/d3plus-hierarchy/mouse-events/)
- * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
- * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
+ * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)<sup> ***New***</sup>
+ * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)<sup> ***New***</sup>
+ * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)<sup> ***New***</sup>
+ * [Custom Mouse Events](http://d3plus.org/examples/d3plus-hierarchy/mouse-events/)<sup> ***New***</sup>
+ * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)<sup> ***New***</sup>
+ * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)<sup> ***New***</sup>
 
 ## API Reference
 
@@ -231,7 +233,7 @@ Uses the [d3 treemap layout](https://github.com/mbostock/d3/wiki/Treemap-Layout)
 
 
 
-<a name="Treemap.padding" href="#Treemap.padding">#</a> Treemap.**padding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L122)
+<a name="Treemap.padding" href="#Treemap.padding">#</a> Treemap.**padding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L124)
 
 If *value* is specified, sets the inner and outer padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current padding accessor.
 
@@ -239,7 +241,7 @@ If *value* is specified, sets the inner and outer padding accessor to the specif
 This is a static method of [<code>Treemap</code>](#Treemap).
 
 
-<a name="Treemap.sort" href="#Treemap.sort">#</a> Treemap.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L135)
+<a name="Treemap.sort" href="#Treemap.sort">#</a> Treemap.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L137)
 
 If *comparator* is specified, sets the sort order for the treemap using the specified comparator function. If *comparator* is not specified, returns the current group sort order, which defaults to descending order by the associated input data's numeric value attribute.
 
@@ -254,7 +256,7 @@ function comparator(a, b) {
 ```
 
 
-<a name="Treemap.sum" href="#Treemap.sum">#</a> Treemap.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L148)
+<a name="Treemap.sum" href="#Treemap.sum">#</a> Treemap.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L150)
 
 If *value* is specified, sets the sum accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current sum accessor.
 
@@ -269,7 +271,7 @@ function sum(d) {
 ```
 
 
-<a name="Treemap.tile" href="#Treemap.tile">#</a> Treemap.**tile**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L157)
+<a name="Treemap.tile" href="#Treemap.tile">#</a> Treemap.**tile**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L159)
 
 If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling) to the specified function and returns the current class instance. If *value* is not specified, returns the current [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling).
 
@@ -294,4 +296,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Fri, 30 Mar 2018 18:53:30 GMT</sub>
+###### <sub>Documentation generated on Fri, 06 Apr 2018 15:16:43 GMT</sub>
