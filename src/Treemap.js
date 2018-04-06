@@ -148,7 +148,7 @@ function sum(d) {
 }
   */
   sum(_) {
-    return arguments.length ? (this._sum = typeof _ === "function" ? _ : constant(_), this) : this._sum;
+    return arguments.length ? (this._sum = typeof _ === "function" ? _ : accessor(_), this) : this._sum;
   }
 
   /**
