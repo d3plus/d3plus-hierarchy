@@ -24,7 +24,9 @@ export default class Treemap extends Viz {
     this._padding = 1;
     this._shapeConfig = assign({}, this._shapeConfig, {
       labelConfig: {
-        fontResize: true
+        fontMax: 20,
+        fontResize: true,
+        padding: 15
       }
     });
     this._sort = (a, b) => b.value - a.value;
