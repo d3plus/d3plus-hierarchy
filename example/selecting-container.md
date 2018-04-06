@@ -28,6 +28,8 @@ var data = [
 
 new d3plus.Treemap()
   .data(data)
+  .groupBy("id")
   .select("#viz")
+  .sum("value")
   .render();
 ```

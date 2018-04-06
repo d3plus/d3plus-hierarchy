@@ -13,11 +13,13 @@ var data = [
 
 new d3plus.Treemap()
   .data(data)
+  .groupBy("id")
   .shapeConfig({
     labelConfig: {
       fontFamily: "serif",
       fontMax: 100
     }
   })
+  .sum("value")
   .render();
 ```

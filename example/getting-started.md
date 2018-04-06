@@ -18,6 +18,7 @@ Only a few lines of code are needed to transform it into an interactive [TreeMap
 new d3plus.Treemap()
   .data(data)
   .groupBy(["parent", "id"])
+  .sum("value")
   .render();
 ```
 

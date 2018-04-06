@@ -29,6 +29,7 @@ var data = [
 
 new d3plus.Treemap()
   .data(data)
+  .groupBy("id")
   .tooltipConfig({
     body: function(d) {
       var table = "<table class='tooltip-table'>";
@@ -45,5 +46,6 @@ new d3plus.Treemap()
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();;
     }
   })
+  .sum("value")
   .render();
 ```

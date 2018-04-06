@@ -13,8 +13,10 @@ var data = [
 
 new d3plus.Treemap()
   .data(data)
+  .groupBy("id")
   .on("click", function(d) {
     alert(d.id + " has been clicked!");
   })
+  .sum("value")
   .render();
 ```

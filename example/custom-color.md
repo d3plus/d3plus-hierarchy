@@ -12,7 +12,7 @@ var data = [
 ];
 ```
 
-Given the new `"color"` variable present in each data point, we can tell the [TreeMap](http://d3plus.org/docs/#Treemap) class to use our specific color for each rectangle's fill attribute. All of methods that the [Rect](http://d3plus.org/docs/#Rect) class makes available are accessible via the [.shapeConfig( )](http://d3plus.org/docs/#Viz.shapeConfig) method:
+Given the new `"color"` variable present in each data point, we can tell the [Treemap](http://d3plus.org/docs/#Treemap) class to use our specific color for each rectangle's fill attribute. All of methods that the [Rect](http://d3plus.org/docs/#Rect) class makes available are accessible via the [.shapeConfig( )](http://d3plus.org/docs/#Viz.shapeConfig) method:
 
 ```js
 new d3plus.Treemap()
@@ -23,5 +23,6 @@ new d3plus.Treemap()
       return d.color;
     }
   })
+  .sum("value")
   .render();
 ```
