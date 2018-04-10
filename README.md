@@ -9,7 +9,7 @@ Nested, hierarchical, and cluster charts built on D3
 If you use NPM, run `npm install d3plus-hierarchy --save`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-hierarchy/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
-<script src="https://d3plus.org/js/d3plus-hierarchy.v0.5.full.min.js"></script>
+<script src="https://d3plus.org/js/d3plus-hierarchy.v0.6.full.min.js"></script>
 ```
 
 
@@ -219,7 +219,7 @@ This is a global class, and extends all of the methods and functionality of <cod
 
 * [Treemap](#Treemap) ⇐ <code>Viz</code>
     * [new Treemap()](#new_Treemap_new)
-    * [.padding([*value*])](#Treemap.padding)
+    * [.layoutPadding([*value*])](#Treemap.layoutPadding)
     * [.sort([*comparator*])](#Treemap.sort)
     * [.sum([*value*])](#Treemap.sum)
     * [.tile([*value*])](#Treemap.tile)
@@ -233,7 +233,7 @@ Uses the [d3 treemap layout](https://github.com/mbostock/d3/wiki/Treemap-Layout)
 
 
 
-<a name="Treemap.padding" href="#Treemap.padding">#</a> Treemap.**padding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L124)
+<a name="Treemap.layoutPadding" href="#Treemap.layoutPadding">#</a> Treemap.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L124)
 
 If *value* is specified, sets the inner and outer padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current padding accessor.
 
@@ -296,4 +296,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Fri, 06 Apr 2018 15:16:43 GMT</sub>
+###### <sub>Documentation generated on Tue, 10 Apr 2018 19:30:37 GMT</sub>
