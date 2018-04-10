@@ -21,7 +21,7 @@ export default class Treemap extends Viz {
 
     super();
 
-    this._padding = 1;
+    this._layoutPadding = 1;
     this._shapeConfig = assign({}, this._shapeConfig, {
       labelConfig: {
         fontMax: 20,
@@ -49,7 +49,7 @@ export default class Treemap extends Viz {
     nestedData = nestedData.entries(this._filteredData);
 
     const tmapData = this._treemap
-      .padding(this._padding)
+      .padding(this._layoutPadding)
       .size([
         this._width - this._margin.left - this._margin.right,
         this._height - this._margin.top - this._margin.bottom
@@ -121,8 +121,8 @@ export default class Treemap extends Viz {
       @desc If *value* is specified, sets the inner and outer padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current padding accessor.
       @param {Function|Number} [*value*]
   */
-  padding(_) {
-    return arguments.length ? (this._padding = typeof _ === "function" ? _ : constant(_), this) : this._padding;
+  layoutPadding(_) {
+    return arguments.length ? (this._layoutPadding = typeof _ === "function" ? _ : constant(_), this) : this._layoutPadding;
   }
 
   /**
