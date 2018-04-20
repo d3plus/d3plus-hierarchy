@@ -47,12 +47,12 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
- * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)<sup> ***New***</sup>
- * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)<sup> ***New***</sup>
- * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)<sup> ***New***</sup>
- * [Custom Mouse Events](http://d3plus.org/examples/d3plus-hierarchy/mouse-events/)<sup> ***New***</sup>
- * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)<sup> ***New***</sup>
- * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)<sup> ***New***</sup>
+ * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)
+ * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)
+ * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)
+ * [Custom Mouse Events](http://d3plus.org/examples/d3plus-hierarchy/mouse-events/)
+ * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
+ * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
 
 ## API Reference
 
@@ -96,7 +96,7 @@ This is a global class, and extends all of the methods and functionality of <cod
     * [.padAngle([*value*])](#Pie.padAngle)
     * [.padPixel([*value*])](#Pie.padPixel)
     * [.sort([*comparator*])](#Pie.sort)
-    * [.value([*value*])](#Pie.value)
+    * [.value(*value*)](#Pie.value)
 
 
 <a name="new_Pie_new" href="#new_Pie_new">#</a> new **Pie**()
@@ -146,7 +146,7 @@ function comparator(a, b) {
 ```
 
 
-<a name="Pie.value" href="#Pie.value">#</a> Pie.**value**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L137)
+<a name="Pie.value" href="#Pie.value">#</a> Pie.**value**(*value*) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L137)
 
 If *value* is specified, sets the value accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current value accessor.
 
@@ -296,4 +296,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Tue, 10 Apr 2018 19:30:37 GMT</sub>
+###### <sub>Documentation generated on Fri, 20 Apr 2018 18:47:25 GMT</sub>
