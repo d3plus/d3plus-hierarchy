@@ -1,7 +1,7 @@
 import {min} from "d3-array";
 import {arc, pie} from "d3-shape";
 
-import {accessor, assign, configPrep, constant, elem} from "d3plus-common";
+import {accessor, assign, configPrep, elem} from "d3plus-common";
 import {Path} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
@@ -128,14 +128,14 @@ function comparator(a, b) {
   /**
       @memberof Pie
       @desc If *value* is specified, sets the value accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current value accessor.
-      @param {Function|Number} [*value*]
+      @param {Function|String} *value*
       @example
 function value(d) {
   return d.value;
 }
   */
   value(_) {
-    return arguments.length ? (this._value = typeof _ === "function" ? _ : constant(_), this) : this._value;
+    return arguments.length ? (this._value = typeof _ === "function" ? _ : accessor(_), this) : this._value;
   }
 
 }
