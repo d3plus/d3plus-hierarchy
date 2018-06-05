@@ -31,7 +31,7 @@ export default class Pie extends Viz {
     this._innerRadius = 0;
     this._padPixel = 0;
     this._pie = pie();
-    this._sort = (a, b) => b.value - a.value;
+    this._sort = (a, b) => this._value(b) - this._value(a);
     this._value = accessor("value");
 
   }
