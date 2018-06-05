@@ -1,6 +1,6 @@
 # d3plus-hierarchy
 
-[![NPM Release](http://img.shields.io/npm/v/d3plus-hierarchy.svg?style=flat)](https://www.npmjs.org/package/d3plus-hierarchy) [![Build Status](https://travis-ci.org/d3plus/d3plus-hierarchy.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-hierarchy) [![Dependency Status](http://img.shields.io/david/d3plus/d3plus-hierarchy.svg?style=flat)](https://david-dm.org/d3plus/d3plus-hierarchy) [![Gitter](https://img.shields.io/badge/-chat_on_gitter-brightgreen.svg?style=flat&logo=gitter-white)](https://gitter.im/d3plus/) 
+[![NPM Release](http://img.shields.io/npm/v/d3plus-hierarchy.svg?style=flat)](https://www.npmjs.org/package/d3plus-hierarchy) [![Build Status](https://travis-ci.org/d3plus/d3plus-hierarchy.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-hierarchy) [![Dependency Status](http://img.shields.io/david/d3plus/d3plus-hierarchy.svg?style=flat)](https://david-dm.org/d3plus/d3plus-hierarchy) [![Gitter](https://img.shields.io/badge/-chat_on_gitter-brightgreen.svg?style=flat&logo=gitter-white)](https://gitter.im/d3plus/) [![1.0 progress](https://img.shields.io/badge/1.0_progress-0%25-red.svg?style=flat)](https://github.com/d3plus/d3plus-hierarchy/projects/1)
 
 Nested, hierarchical, and cluster charts built on D3
 
@@ -47,6 +47,7 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
+ * [Hiding Tooltip on Click](http://d3plus.org/examples/d3plus-hierarchy/hiding-tooltip-on-click/)
  * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)
  * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)
  * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)
@@ -296,4 +297,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Fri, 20 Apr 2018 18:48:21 GMT</sub>
+###### <sub>Documentation generated on Tue, 05 Jun 2018 17:51:10 GMT</sub>
