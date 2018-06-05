@@ -64,7 +64,7 @@ export default class Pie extends Viz {
       .innerRadius(this._innerRadius)
       .outerRadius(outerRadius);
 
-    const transform = `translate(${width / 2}, ${height / 2})`;
+    const transform = `translate(${width / 2 + this._margin.left}, ${height / 2 + this._margin.top})`;
     this._shapes.push(new Path()
       .data(pieData)
       .d(arcData)
