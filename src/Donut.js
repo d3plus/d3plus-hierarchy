@@ -21,7 +21,7 @@ export default class Donut extends Pie {
       this._width - this._margin.left - this._margin.right,
       this._height - this._margin.top - this._margin.bottom
     ]) / 4;
-    this._padPixel = 5;
+    this._padPixel = 2;
 
   }
 
