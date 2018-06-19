@@ -11,22 +11,7 @@ import {Viz} from "d3plus-viz";
     @private
 */
 function constructAriaLabel(d, i) {
-  return d.index + ". " + this._drawLabel(d, i) + ", " + d.data.value + ".";
-}
-
-/**
-    @function sortByValueAndAssignIndex
-    @desc Returns array of objects sorted by value and added index property to each sorted object.
-    @private
-*/
-function sortByValueAndAssignIndex(data) {
-  data.sort((a, b) => b.value - a.value);
-
-  for (let i = 0; i < data.length; ++i) {
-    data[i].index = i;
-  }
-  console.log("sorted data: ", data);
-  return data;
+  return i + ". " + this._drawLabel(d, i) + ", " + d.data.value + ".";
 }
 
 /**
@@ -82,8 +67,7 @@ export default class Treemap extends Viz {
       .tile(this._tile)
       (hierarchy({values: nestedData}, d => d.values).sum(this._sum).sort(this._sort));
 
-    let shapeData = [];
-    const that = this;
+    const shapeData = [], that = this;
 
     /**
         @memberof Treemap
@@ -107,8 +91,6 @@ export default class Treemap extends Viz {
     }
     if (tmapData.children) extractLayout(tmapData.children);
     const total = tmapData.value;
-
-    shapeData = sortByValueAndAssignIndex(shapeData);
 
     const transform = `translate(${this._margin.left}, ${this._margin.top})`;
     this._shapes.push(new Rect()
