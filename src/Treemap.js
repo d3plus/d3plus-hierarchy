@@ -6,6 +6,30 @@ import {Rect} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
 /**
+    @function constructAriaLabel
+    @desc Returns value for aria-label property of Shapes.
+    @private
+*/
+function constructAriaLabel(d, i) {
+  return d.index + ". " + this._drawLabel(d, i) + ", " + d.data.value + ".";
+}
+
+/**
+    @function sortByValueAndAssignIndex
+    @desc Returns array of objects sorted by value and added index property to each sorted object.
+    @private
+*/
+function sortByValueAndAssignIndex(data) {
+  data.sort((a, b) => b.value - a.value);
+
+  for (let i = 0; i < data.length; ++i) {
+    data[i].index = i;
+  }
+  console.log("sorted data: ", data);
+  return data;
+}
+
+/**
     @class Treemap
     @extends Viz
     @desc Uses the [d3 treemap layout](https://github.com/mbostock/d3/wiki/Treemap-Layout) to creates SVG rectangles based on an array of data. See [this example](https://d3plus.org/examples/d3plus-hierarchy/getting-started/) for help getting started using the treemap generator.
@@ -37,7 +61,8 @@ export default class Treemap extends Viz {
   }
 
   /**
-      Extends the draw behavior of the abstract Viz class.
+      @memberof Treemap
+      @desc Extends the draw behavior of the abstract Viz class.
       @private
   */
   _draw(callback) {
@@ -57,10 +82,12 @@ export default class Treemap extends Viz {
       .tile(this._tile)
       (hierarchy({values: nestedData}, d => d.values).sum(this._sum).sort(this._sort));
 
-    const shapeData = [], that = this;
+    let shapeData = [];
+    const that = this;
 
     /**
-        Flattens and merges treemap data.
+        @memberof Treemap
+        @desc Flattens and merges treemap data.
         @private
     */
     function extractLayout(children) {
@@ -80,6 +107,8 @@ export default class Treemap extends Viz {
     }
     if (tmapData.children) extractLayout(tmapData.children);
     const total = tmapData.value;
+
+    shapeData = sortByValueAndAssignIndex(shapeData);
 
     const transform = `translate(${this._margin.left}, ${this._margin.top})`;
     this._shapes.push(new Rect()
@@ -110,6 +139,7 @@ export default class Treemap extends Viz {
         width: d => d.x1 - d.x0
       })
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Rect"))
+      .config({ariaLabel: constructAriaLabel.bind(this)})
       .render());
 
     return this;
