@@ -6,15 +6,6 @@ import {Path} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
 /**
-    @function constructAriaLabel
-    @desc Returns value for aria-label property of Shapes.
-    @private
-*/
-function constructAriaLabel(d, i) {
-  return d.index + ". " + this._drawLabel(d, i) + ", " + d.value + ".";
-}
-
-/**
     @class Pie
     @extends Viz
     @desc Uses the [d3 pie layout](https://github.com/d3/d3-shape#pies) to creates SVG arcs based on an array of data.
@@ -87,7 +78,7 @@ export default class Pie extends Viz {
         y: 0
       })
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Path"))
-      .config({ariaLabel: constructAriaLabel.bind(this)})
+      .config({ariaLabel: (d, i) => `${d.index}. ${this._drawLabel(d, i)}, ${d.value}.`})
       .render());
 
     return this;
