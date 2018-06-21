@@ -6,15 +6,6 @@ import {Rect} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
 /**
-    @function constructAriaLabel
-    @desc Returns value for aria-label property of Shapes.
-    @private
-*/
-function constructAriaLabel(d, i) {
-  return i + ". " + this._drawLabel(d, i) + ", " + d.data.value + ".";
-}
-
-/**
     @class Treemap
     @extends Viz
     @desc Uses the [d3 treemap layout](https://github.com/mbostock/d3/wiki/Treemap-Layout) to creates SVG rectangles based on an array of data. See [this example](https://d3plus.org/examples/d3plus-hierarchy/getting-started/) for help getting started using the treemap generator.
@@ -121,7 +112,7 @@ export default class Treemap extends Viz {
         width: d => d.x1 - d.x0
       })
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Rect"))
-      .config({ariaLabel: constructAriaLabel.bind(this)})
+      .config({ariaLabel: (d, i) => `${i}. ${this._drawLabel(d, i)}, ${d.data.value}.`})
       .render());
 
     return this;

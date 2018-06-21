@@ -9,15 +9,6 @@ import {Viz} from "d3plus-viz";
 import {default as nest} from "./nest";
 
 /**
-    @function constructAriaLabel
-    @desc Returns value for aria-label property of Shapes.
-    @private
-*/
-function constructAriaLabel(d, i) {
-  return d.depth + ". " + this._drawLabel(d, i) + ", " + d.data.value + ".";
-}
-
-/**
     @class Tree
     @extends Viz
     @desc Uses d3's [tree layout](https://github.com/d3/d3-hierarchy#tree) to create a tidy tree chart based on an array of data.
@@ -202,7 +193,7 @@ export default class Tree extends Viz {
 
         }
       })
-      .config({ariaLabel: constructAriaLabel.bind(this)})
+      .config({ariaLabel: (d, i) => `${d.depth}. ${this._drawLabel(d, i)}, ${d.data.value}.`})
       .render());
 
     return this;
