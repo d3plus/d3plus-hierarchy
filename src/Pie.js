@@ -22,6 +22,7 @@ export default class Pie extends Viz {
     super();
 
     this._shapeConfig = assign(this._shapeConfig, {
+      ariaLabel: (d, i) =>  this._pieData ? `${++this._pieData[i].index}. ${this._drawLabel(d, i)}, ${d.value}.` : "",
       Path: {
         labelConfig: {
           fontResize: true
@@ -48,7 +49,7 @@ export default class Pie extends Viz {
 
     const outerRadius = min([width, height]) / 2;
 
-    const pieData = this._pie
+    const pieData = this._pieData = this._pie
       .padAngle(this._padAngle || this._padPixel / outerRadius)
       .sort(this._sort)
       .value(this._value)
@@ -78,7 +79,6 @@ export default class Pie extends Viz {
         y: 0
       })
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Path"))
-      .config({ariaLabel: (d, i) => `${d.index}. ${this._drawLabel(d, i)}, ${d.value}.`})
       .render());
 
     return this;
