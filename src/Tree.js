@@ -29,6 +29,7 @@ export default class Tree extends Viz {
 
     this._shape = constant("Circle");
     this._shapeConfig = assign(this._shapeConfig, {
+      ariaLabel: (d, i) =>  this._treeData ? `${this._treeData[i].depth}. ${this._drawLabel(d, i)}, ${d.value}.` : "",
       labelConfig: {
         fontColor: "#444"
       },
@@ -64,7 +65,7 @@ export default class Tree extends Viz {
             ? this._height - this._margin.top - this._margin.bottom
             : this._width - this._margin.left - this._margin.right;
 
-    const treeData = this._tree
+    const treeData = this._treeData = this._tree
       .separation(this._separation)
       .size([width, height])
       (hierarchy({
@@ -193,7 +194,6 @@ export default class Tree extends Viz {
 
         }
       })
-      .config({ariaLabel: (d, i) => `${d.depth}. ${this._drawLabel(d, i)}, ${d.data.value}.`})
       .render());
 
     return this;

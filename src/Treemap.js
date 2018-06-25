@@ -23,6 +23,7 @@ export default class Treemap extends Viz {
 
     this._layoutPadding = 1;
     this._shapeConfig = assign({}, this._shapeConfig, {
+      ariaLabel: (d, i) => `${d.index + 1}. ${this._drawLabel(d, i)}, ${d.value}.`,
       labelConfig: {
         fontMax: 20,
         fontResize: true,
@@ -45,6 +46,12 @@ export default class Treemap extends Viz {
 
     super._draw(callback);
 
+    // Sort input data and assign index property to them.
+    const sortedFilteredData = this._filteredData.sort(this._sort);
+    for (let i = 0; i < sortedFilteredData.length; ++i) {
+      sortedFilteredData[i].index = i;
+    }
+    
     let nestedData = nest();
     for (let i = 0; i <= this._drawDepth; i++) nestedData.key(this._groupBy[i]);
     nestedData = nestedData.entries(this._filteredData);
@@ -112,7 +119,6 @@ export default class Treemap extends Viz {
         width: d => d.x1 - d.x0
       })
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Rect"))
-      .config({ariaLabel: (d, i) => `${i}. ${this._drawLabel(d, i)}, ${d.data.value}.`})
       .render());
 
     return this;
