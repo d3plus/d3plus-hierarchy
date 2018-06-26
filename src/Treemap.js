@@ -84,8 +84,8 @@ export default class Treemap extends Viz {
         else {
           node.__d3plus__ = true;
           node.id = node.data.key;
+          node.i = node.data.values.length === 1 && that._filteredData.includes(node.data.values[0]) ? that._filteredData.indexOf(node.data.values[0]) : undefined;
           node.data = merge(node.data.values);
-          node.i = i;
           node.x = node.x0 + (node.x1 - node.x0) / 2;
           node.y = node.y0 + (node.y1 - node.y0) / 2;
           shapeData.push(node);
