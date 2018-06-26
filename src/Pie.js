@@ -22,7 +22,7 @@ export default class Pie extends Viz {
     super();
 
     this._shapeConfig = assign(this._shapeConfig, {
-      ariaLabel: (d, i) =>  this._pieData ? `${++this._pieData[i].index}. ${this._drawLabel(d, i)}, ${d.value}.` : "",
+      ariaLabel: (d, i) =>  this._pieData ? `${++this._pieData[i].index}. ${this._drawLabel(d, i)}, ${this._value(d, i)}.` : "",
       Path: {
         labelConfig: {
           fontResize: true
