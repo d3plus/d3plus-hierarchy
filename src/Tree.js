@@ -29,7 +29,7 @@ export default class Tree extends Viz {
 
     this._shape = constant("Circle");
     this._shapeConfig = assign(this._shapeConfig, {
-      ariaLabel: (d, i) =>  this._treeData ? `${this._treeData[i].depth}. ${this._drawLabel(d, i)}, ${d.value}.` : "",
+      ariaLabel: (d, i) =>  this._treeData ? `${this._treeData[i].depth}. ${this._drawLabel(d, i)}.` : "",
       labelConfig: {
         fontColor: "#444"
       },

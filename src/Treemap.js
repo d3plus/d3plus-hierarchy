@@ -22,12 +22,10 @@ export default class Treemap extends Viz {
     super();
 
     this._layoutPadding = 1;
-    this._rankIndices = [];
     this._shapeConfig = assign({}, this._shapeConfig, {
       ariaLabel: (d, i) => {
-        console.log("d: ", d);
-        console.log("rank:", this._rankData ? this._rankData.indexOf(d) + 1 : false);
-        return `${d.index + 1}. ${this._drawLabel(d, i)}, ${d.value}.`;
+        const rank = this._rankData ? `${this._rankData.indexOf(d) + 1}. ` : "";
+        return `${rank}${this._drawLabel(d, i)}, ${this._sum(d, i)}.`;
       },
       labelConfig: {
         fontMax: 20,
@@ -50,12 +48,6 @@ export default class Treemap extends Viz {
   _draw(callback) {
 
     super._draw(callback);
-
-    // Sort input data and assign index property to them.
-    // const sortedFilteredData = this._filteredData.sort(this._sort);
-    // for (let i = 0; i < sortedFilteredData.length; ++i) {
-    //   sortedFilteredData[i].index = i;
-    // }
     
     let nestedData = nest();
     for (let i = 0; i <= this._drawDepth; i++) nestedData.key(this._groupBy[i]);
@@ -95,10 +87,6 @@ export default class Treemap extends Viz {
     if (tmapData.children) extractLayout(tmapData.children);
 
     this._rankData = shapeData.sort(this._sort).map(d => d.data);
-    console.log("rankData: ", this._rankData);
-    
-    console.log("this._rankIndices: ", this._rankIndices);
-
     const total = tmapData.value;
 
     const transform = `translate(${this._margin.left}, ${this._margin.top})`;
