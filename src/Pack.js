@@ -5,7 +5,7 @@
 import {nest} from "d3-collection";
 import {hierarchy, pack} from "d3-hierarchy";
 
-import {accessor, assign, configPrep, constant, elem, merge} from "d3plus-common";
+import {accessor, assign, configPrep, constant, elem} from "d3plus-common";
 import * as shapes from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
