@@ -6,8 +6,21 @@ import {nest} from "d3-collection";
 import {hierarchy, pack} from "d3-hierarchy";
 
 import {accessor, assign, configPrep, constant, elem} from "d3plus-common";
-import * as shapes from "d3plus-shape";
+import {Circle} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
+
+const recursionCircles = (d, arr = []) => {
+  if (d.values) {
+    d.values.forEach(h => {
+      arr.push(h);
+      recursionCircles(h, arr);
+    });
+  }
+  else {
+    arr.push(d);
+  }
+  return arr;
+};
 
 /**
     @class Pack
@@ -27,67 +40,43 @@ export default class Pack extends Viz {
 
     this._layoutPadding = 1;
     this._on.mouseenter = () => {};
-    this._on["mouseleave.shape"] = () => {
-      this._tooltip = false;
-      this.hover(false);
-    };
 
-    let hoverData = [];
-    const recursionCircles = d => {
-      if (d.values) {
-        d.values.forEach(h => {
-          hoverData.push(h);
-          recursionCircles(h);
-        });
-      }
-      else {
-        hoverData.push(d);
-      }
-    };
-    const defaultMouseMove = this._on["mousemove.shape"];
+    const defaultMouseMoveLegend = this._on["mousemove.legend"];
     this._on["mousemove.legend"] = (d, i) => {
+      defaultMouseMoveLegend(d, i);
+
       const ids = this._ids(d, i);
-      hoverData = [d];
-      recursionCircles(d);
+      const hoverData = recursionCircles(d);
 
       this.hover(h => {
-        const _hover = Object.keys(h).filter(key => key !== "value").every(key => d[key] && d[key].includes(h[key]));
+        const hover = Object.keys(h).filter(key => key !== "value").every(key => d[key] && d[key].includes(h[key]));
 
-        if (_hover) hoverData.push(h);
-        else if (ids.includes(h.key)) {
-          hoverData.push(h);
-          recursionCircles(h);
-        }
+        if (hover) hoverData.push(h);
+        else if (ids.includes(h.key)) hoverData.push(...recursionCircles(h, [h]));
 
         return hoverData.includes(h);
       });
 
     };
+    const defaultMouseMoveShape = this._on["mousemove.shape"];
     this._on["mousemove.shape"] = (d, i) => {
-      defaultMouseMove(d, i);
-
-      this._tooltip = d.__d3plusTooltip__;
-
-      hoverData = [d];
-      recursionCircles(d);
-
-      this.hover(h => hoverData.includes(h));
-
+      if (d.__d3plusTooltip__) defaultMouseMoveShape(d, i);
+      this.hover(h => recursionCircles(d, [d]).includes(h));
     };
     this._pack = pack();
-    this._packOpacity = 0.25;
+    this._packOpacity = constant(0.25);
     this._shape = constant("Circle");
     this._shapeConfig = assign(this._shapeConfig, {
       Circle: {
-        opacity: d => d.__d3plusOpacity__ || 1,
+        label: d => d.parent && !d.children ? d.id : false,
         labelConfig: {
           fontResize: true
-        }
+        },
+        opacity: d => d.__d3plusOpacity__
       }
     });
     this._sort = (a, b) => b.value - a.value;
     this._sum = accessor("value");
-    this._tooltip = false;
 
   }
 
@@ -116,30 +105,22 @@ export default class Pack extends Viz {
 
     packData.forEach((d, i) => {
       d.__d3plus__ = true;
-      d.children = d.children;
-      d.data.__d3plusTooltip__ = !d.height ? true : false;
-      d.depth = d.depth;
       d.i = i;
       d.id = d.parent ? d.parent.data.key : null;
-      d.parent = d.parent;
-      d.x = d.x;
-      d.y = d.y;
-      if (d.height) d.data.__d3plusOpacity__ = this._packOpacity;
+      d.data.__d3plusOpacity__ = d.height ? this._packOpacity(d.data, i) : 1;
+      d.data.__d3plusTooltip__ = !d.height ? true : false;
     });
 
     this._shapes.push(
-      new shapes.Circle()
+      new Circle()
         .data(packData)
         .select(
-          elem("g.d3plus-Pack-circle", {
+          elem("g.d3plus-Pack", {
             parent: this._select,
             enter: {transform},
             update: {transform}
           }).node()
         )
-        .config({
-          label: d => d.parent && !d.children ? d.id : false
-        })
         .config(configPrep.bind(this)(this._shapeConfig, "shape", "Circle"))
         .render()
     );
@@ -167,7 +148,7 @@ export default class Pack extends Viz {
       @param {Function|Number} [*value*]
   */
   layoutPadding(_) {
-    return arguments.length ? (this._layoutPadding = typeof _ === "function" ? _ : constant(_), this) : this._layoutPadding;
+    return arguments.length ? (this._layoutPadding = _, this) : this._layoutPadding;
   }
 
   /**
@@ -178,6 +159,20 @@ export default class Pack extends Viz {
   packOpacity(_) {
     return arguments.length ? (this._packOpacity = typeof _ === "function" ? _ : constant(_), this) : this._packOpacity;
   }
+
+  /**
+      @memberof Pack
+      @desc If *comparator* is specified, sets the sort order for the pack using the specified comparator function. If *comparator* is not specified, returns the current group sort order, which defaults to descending order by the associated input data's numeric value attribute.
+      @param {Array} [*comparator*]
+      @example
+function comparator(a, b) {
+  return b.value - a.value;
+}
+  */
+  sort(_) {
+    return arguments.length ? (this._sort = _, this) : this._sort;
+  }
+
 
   /**
       @memberof Pack
