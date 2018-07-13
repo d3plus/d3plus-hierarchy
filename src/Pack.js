@@ -73,6 +73,7 @@ export default class Pack extends Viz {
 
     };
     this._pack = pack();
+    this._packOpacity = 0.25;
     this._shape = constant("Circle");
     this._shapeConfig = assign(this._shapeConfig, {
       Circle: {
@@ -119,7 +120,7 @@ export default class Pack extends Viz {
       d.parent = d.parent;
       d.x = d.x;
       d.y = d.y;
-      if (d.height) d.data.__d3plusOpacity__ = 0.25;
+      if (d.height) d.data.__d3plusOpacity__ = this._packOpacity;
     });
 
     this._shapes.push(
@@ -142,6 +143,12 @@ export default class Pack extends Viz {
     return this;
   }
 
+  /**
+      @memberof Pack
+      @desc If *value* is specified, sets the hover method to the specified function and returns the current class instance.
+      @param {Function} [*value*]
+      @chainable
+   */
   hover(_) {
     this._hover = _;
     this._shapes.forEach(s => s.hover(_));
@@ -152,11 +159,20 @@ export default class Pack extends Viz {
 
   /**
       @memberof Pack
-      @desc If *value* is specified, sets the inner and outer padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current padding accessor.
+      @desc If *value* is specified, sets the opacity accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current pack opacity accessor.
       @param {Function|Number} [*value*]
   */
   layoutPadding(_) {
     return arguments.length ? (this._layoutPadding = typeof _ === "function" ? _ : constant(_), this) : this._layoutPadding;
+  }
+
+  /**
+      @memberof Pack
+      @desc If *value* is specified, sets the padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current pack opacity accessor.
+      @param {Function|Number} [*value*]
+  */
+  packOpacity(_) {
+    return arguments.length ? (this._packOpacity = typeof _ === "function" ? _ : constant(_), this) : this._packOpacity;
   }
 
   /**
