@@ -12,7 +12,7 @@ import {Viz} from "d3plus-viz";
 /**
     @class Pack
     @extends Viz
-    @desc Uses the [d3 pack layout](https://github.com/d3/d3-hierarchy#pack) to creates SVG arcs based on an array of data.
+    @desc Uses the [d3 pack layout](https://github.com/d3/d3-hierarchy#pack) to creates Circle Packing chart based on an array of data.
 */
 export default class Pack extends Viz {
 
