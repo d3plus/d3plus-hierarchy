@@ -23,4 +23,4 @@ new d3plus.Pack()
 
 ```
 
-Colors are assigned to each unique ID using the color [assign](http://d3plus.org/docs/#assign) function, and the circles are created using the [Circle](http://d3plus.org/docs/#Circle) class.
+Colors are assigned to each unique ID using the color [assign](http://d3plus.org/docs/#assign) function, and the bubbles are created using the [Circle](http://d3plus.org/docs/#Circle) class.
