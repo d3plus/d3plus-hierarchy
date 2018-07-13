@@ -28,6 +28,7 @@ export default class Pack extends Viz {
     this._layoutPadding = 1;
     this._on.mouseenter = () => {};
     this._on["mouseleave.shape"] = () => {
+      this._tooltip = false;
       this.hover(false);
     };
 
@@ -46,7 +47,6 @@ export default class Pack extends Viz {
     const defaultMouseMove = this._on["mousemove.shape"];
     this._on["mousemove.legend"] = (d, i) => {
       const ids = this._ids(d, i);
-
       hoverData = [d];
       recursionCircles(d);
 
@@ -65,6 +65,8 @@ export default class Pack extends Viz {
     };
     this._on["mousemove.shape"] = (d, i) => {
       defaultMouseMove(d, i);
+
+      this._tooltip = d.__d3plusTooltip__;
 
       hoverData = [d];
       recursionCircles(d);
@@ -85,6 +87,7 @@ export default class Pack extends Viz {
     });
     this._sort = (a, b) => b.value - a.value;
     this._sum = accessor("value");
+    this._tooltip = false;
 
   }
 
@@ -114,6 +117,7 @@ export default class Pack extends Viz {
     packData.forEach((d, i) => {
       d.__d3plus__ = true;
       d.children = d.children;
+      d.data.__d3plusTooltip__ = !d.height ? true : false;
       d.depth = d.depth;
       d.i = i;
       d.id = d.parent ? d.parent.data.key : null;
