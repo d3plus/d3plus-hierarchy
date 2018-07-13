@@ -30,30 +30,46 @@ export default class Pack extends Viz {
     this._on["mouseleave.shape"] = () => {
       this.hover(false);
     };
+
+    let hoverData = [];
+    const recursionCircles = d => {
+      if (d.values) {
+        d.values.forEach(h => {
+          hoverData.push(h);
+          recursionCircles(h);
+        });
+      }
+      else {
+        hoverData.push(d);
+      }
+    };
     const defaultMouseMove = this._on["mousemove.shape"];
+    this._on["mousemove.legend"] = (d, i) => {
+      const ids = this._ids(d, i);
+
+      hoverData = [d];
+      recursionCircles(d);
+
+      this.hover(h => {
+        const _hover = Object.keys(h).filter(key => key !== "value").every(key => d[key] && d[key].includes(h[key]));
+
+        if (_hover) hoverData.push(h);
+        else if (ids.includes(h.key)) {
+          hoverData.push(h);
+          recursionCircles(h);
+        }
+
+        return hoverData.includes(h);
+      });
+
+    };
     this._on["mousemove.shape"] = (d, i) => {
       defaultMouseMove(d, i);
-      console.log(d);
-      const hoverData = [d];
-      function recursion(d) {
-        if (d.values) {
-          d.values.forEach((h, x) => {
-            hoverData.push(h);
-            recursion (h);
-          });
-        }
-        else {
-          hoverData.push(d);
-        }
-      }
 
-      recursion(d);
+      hoverData = [d];
+      recursionCircles(d);
 
-      this.hover((h, x) => {
-        if (hoverData.includes(h)) {
-          return true;
-        }
-      });
+      this.hover(h => hoverData.includes(h));
 
     };
     this._pack = pack();
@@ -117,7 +133,7 @@ export default class Pack extends Viz {
           }).node()
         )
         .config({
-          label: (d, i) => d.parent && !d.children ? this._id(d, i) : false
+          label: d => d.parent && !d.children ? d.id : false
         })
         .config(configPrep.bind(this)(this._shapeConfig, "shape", "Circle"))
         .render()
@@ -129,8 +145,6 @@ export default class Pack extends Viz {
   hover(_) {
     this._hover = _;
     this._shapes.forEach(s => s.hover(_));
-    
-    console.log(this);
 
     if (this._legend) this._legendClass.hover(_);
     return this;
