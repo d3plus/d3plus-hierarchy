@@ -9,7 +9,7 @@ Nested, hierarchical, and cluster charts built on D3
 If you use NPM, run `npm install d3plus-hierarchy --save`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-hierarchy/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
-<script src="https://d3plus.org/js/d3plus-hierarchy.v0.6.full.min.js"></script>
+<script src="https://d3plus.org/js/d3plus-hierarchy.v0.7.full.min.js"></script>
 ```
 
 
@@ -47,6 +47,7 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
+ * [Circle Packing Chart](http://d3plus.org/examples/d3plus-hierarchy/pack/)<sup> ***New***</sup>
  * [Hiding Tooltip on Click](http://d3plus.org/examples/d3plus-hierarchy/hiding-tooltip-on-click/)
  * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)
  * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)
@@ -59,6 +60,7 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ##### 
 * [Donut](#Donut)
+* [Pack](#Pack)
 * [Pie](#Pie)
 * [Tree](#Tree)
 * [Treemap](#Treemap)
@@ -81,6 +83,85 @@ Extends the Pie visualization to create a donut chart.
 
 
 
+
+---
+
+<a name="Pack"></a>
+#### **Pack** [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L25)
+
+
+This is a global class, and extends all of the methods and functionality of <code>Viz</code>.
+
+
+* [Pack](#Pack) ⇐ <code>Viz</code>
+    * [new Pack()](#new_Pack_new)
+    * [.hover([*value*])](#Pack.hover) ↩︎
+    * [.layoutPadding([*value*])](#Pack.layoutPadding)
+    * [.packOpacity([*value*])](#Pack.packOpacity)
+    * [.sort([*comparator*])](#Pack.sort)
+    * [.sum([*value*])](#Pack.sum)
+
+
+<a name="new_Pack_new" href="#new_Pack_new">#</a> new **Pack**()
+
+Uses the [d3 pack layout](https://github.com/d3/d3-hierarchy#pack) to creates Circle Packing chart based on an array of data.
+
+
+
+
+
+<a name="Pack.hover" href="#Pack.hover">#</a> Pack.**hover**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L137)
+
+If *value* is specified, sets the hover method to the specified function and returns the current class instance.
+
+
+This is a static method of [<code>Pack</code>](#Pack), and is chainable with other methods of this Class.
+
+
+<a name="Pack.layoutPadding" href="#Pack.layoutPadding">#</a> Pack.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L150)
+
+If *value* is specified, sets the opacity accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current pack opacity accessor.
+
+
+This is a static method of [<code>Pack</code>](#Pack).
+
+
+<a name="Pack.packOpacity" href="#Pack.packOpacity">#</a> Pack.**packOpacity**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L159)
+
+If *value* is specified, sets the padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current pack opacity accessor.
+
+
+This is a static method of [<code>Pack</code>](#Pack).
+
+
+<a name="Pack.sort" href="#Pack.sort">#</a> Pack.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L172)
+
+If *comparator* is specified, sets the sort order for the pack using the specified comparator function. If *comparator* is not specified, returns the current group sort order, which defaults to descending order by the associated input data's numeric value attribute.
+
+
+This is a static method of [<code>Pack</code>](#Pack).
+
+
+```js
+function comparator(a, b) {
+  return b.value - a.value;
+}
+```
+
+
+<a name="Pack.sum" href="#Pack.sum">#</a> Pack.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L186)
+
+If *value* is specified, sets the sum accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current sum accessor.
+
+
+This is a static method of [<code>Pack</code>](#Pack).
+
+
+```js
+function sum(d) {
+  return d.sum;
+}
+```
 
 ---
 
@@ -297,4 +378,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Wed, 27 Jun 2018 17:45:25 GMT</sub>
+###### <sub>Documentation generated on Tue, 17 Jul 2018 15:08:46 GMT</sub>
