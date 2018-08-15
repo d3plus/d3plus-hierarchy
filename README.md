@@ -47,7 +47,7 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
- * [Circle Packing Chart](http://d3plus.org/examples/d3plus-hierarchy/pack/)<sup> ***New***</sup>
+ * [Circle Packing Chart](http://d3plus.org/examples/d3plus-hierarchy/pack/)
  * [Hiding Tooltip on Click](http://d3plus.org/examples/d3plus-hierarchy/hiding-tooltip-on-click/)
  * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)
  * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)
@@ -378,4 +378,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Tue, 17 Jul 2018 15:08:46 GMT</sub>
+###### <sub>Documentation generated on Wed, 15 Aug 2018 14:18:59 GMT</sub>
