@@ -23,11 +23,11 @@
     "url": "http://www.dave-landry.com"
   },
   "dependencies": {
-    "d3-array": "^1.2.1",
-    "d3-collection": "^1.0.1",
-    "d3-hierarchy": "^1.1.6",
-    "d3-scale": "^2.0.0",
-    "d3-shape": "^1.0.3",
+    "d3-array": "^1.2.4",
+    "d3-collection": "^1.0.7",
+    "d3-hierarchy": "^1.1.8",
+    "d3-scale": "^2.1.2",
+    "d3-shape": "^1.2.2",
     "d3plus-common": "^0.6.39",
     "d3plus-shape": "^0.16.0",
     "d3plus-viz": "^0.11.14"
