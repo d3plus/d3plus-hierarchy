@@ -378,4 +378,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Mon, 17 Sep 2018 14:19:05 GMT</sub>
+###### <sub>Documentation generated on Tue, 18 Sep 2018 01:21:09 GMT</sub>
