@@ -33,8 +33,13 @@ export default class Treemap extends Viz {
         padding: 15
       }
     });
-    this._sort = (a, b) => b.value - a.value;
+    this._sort = (a, b) => { 
+      if (a.data._isAggregated || a.data.values && a.data.values.length === 1 && a.data.values[0]._isAggregated) return 1;
+      if (b.data._isAggregated || b.data.values && b.data.values.length === 1 && b.data.values[0]._isAggregated) return -1;
+      return b.value - a.value;
+    };
     this._sum = accessor("value");
+    this._thresholdKey = this._sum;
     this._tile = treemapSquarify;
     this._treemap = treemap().round(true);
 
@@ -74,9 +79,11 @@ export default class Treemap extends Viz {
         const node = children[i];
         if (node.depth <= that._drawDepth) extractLayout(node.children);
         else {
+          const isLeaf = node.data.values.length === 1 && that._filteredData.includes(node.data.values[0]);
           node.__d3plus__ = true;
+          node._isAggregated = isLeaf ? node.data.values[0]._isAggregated : undefined;
           node.id = node.data.key;
-          node.i = node.data.values.length === 1 && that._filteredData.includes(node.data.values[0]) ? that._filteredData.indexOf(node.data.values[0]) : undefined;
+          node.i = isLeaf ? that._filteredData.indexOf(node.data.values[0]) : undefined;
           node.data = merge(node.data.values);
           node.x = node.x0 + (node.x1 - node.x0) / 2;
           node.y = node.y0 + (node.y1 - node.y0) / 2;
@@ -156,7 +163,12 @@ function sum(d) {
 }
   */
   sum(_) {
-    return arguments.length ? (this._sum = typeof _ === "function" ? _ : accessor(_), this) : this._sum;
+    if (arguments.length) {
+      this._sum = typeof _ === "function" ? _ : accessor(_);
+      this._thresholdKey = this._sum;
+      return this;
+    }
+    else return this._sum;
   }
 
   /**
