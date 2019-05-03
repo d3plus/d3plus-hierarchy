@@ -1,3 +1,4 @@
+import {sum} from "d3-array";
 import {nest} from "d3-collection";
 import {hierarchy, treemap, treemapSquarify} from "d3-hierarchy";
 
@@ -33,15 +34,17 @@ export default class Treemap extends Viz {
         padding: 15
       }
     });
-    this._sort = (a, b) => { 
-      if (a.data._isAggregated || a.data.values && a.data.values.length === 1 && a.data.values[0]._isAggregated) return 1;
-      if (b.data._isAggregated || b.data.values && b.data.values.length === 1 && b.data.values[0]._isAggregated) return -1;
-      return b.value - a.value;
+    this._sort = (a, b) => {
+      const aggA = isAggregated(a);
+      const aggB = isAggregated(b);
+      return aggA && !aggB ? 1 : !aggA && aggB ? -1 : b.value - a.value;
     };
     this._sum = accessor("value");
     this._thresholdKey = this._sum;
     this._tile = treemapSquarify;
     this._treemap = treemap().round(true);
+
+    const isAggregated = (leaf) => leaf.children && leaf.children.length === 1 && leaf.children[0].data._isAggregation;
 
   }
 
@@ -79,11 +82,10 @@ export default class Treemap extends Viz {
         const node = children[i];
         if (node.depth <= that._drawDepth) extractLayout(node.children);
         else {
-          const isLeaf = node.data.values.length === 1 && that._filteredData.includes(node.data.values[0]);
+          const index = node.data.values.length === 1 ? that._filteredData.indexOf(node.data.values[0]) : undefined;
           node.__d3plus__ = true;
-          node._isAggregated = isLeaf ? node.data.values[0]._isAggregated : undefined;
           node.id = node.data.key;
-          node.i = isLeaf ? that._filteredData.indexOf(node.data.values[0]) : undefined;
+          node.i = index > -1 ? index : undefined;
           node.data = merge(node.data.values);
           node.x = node.x0 + (node.x1 - node.x0) / 2;
           node.y = node.y0 + (node.y1 - node.y0) / 2;
@@ -129,6 +131,73 @@ export default class Treemap extends Viz {
 
     return this;
 
+  }
+
+  /**
+   * Applies the threshold algorithm for Treemaps.
+   * @param {Array} data The data to process.
+   */
+  _thresholdFunction(data, tree) {
+    if (this._threshold && this._thresholdKey) {
+      const aggs = this._aggs;
+      const drawDepth = this._drawDepth;
+      const groupBy = this._groupBy;
+      const threshold = this._threshold;
+      const thresholdKey = this._thresholdKey;
+
+      const flatData = data.slice();
+      const totalSum = sum(flatData, thresholdKey);
+
+      function thresholdByDepth(values, branch, depth) {
+        if (depth >= drawDepth) return;
+
+        const accesor = groupBy[depth];
+        const nextValues = values.filter(item => accesor(item) === branch.key);
+
+        values.forEach(item => {
+          console.log(item.Year);
+        })
+
+        if (depth + 1 === drawDepth) {
+          const removedItems = [];
+          const thresholdPercent = Math.min(1, Math.max(0, threshold(nextValues)));
+
+          if (!isFinite(thresholdPercent) || isNaN(thresholdPercent)) return;
+
+          const thresholdValue = thresholdPercent * totalSum;
+
+          let n = nextValues.length;
+          while (n--) {
+            const item = nextValues[n];
+            if (thresholdKey(item) < thresholdValue) {
+              const index = flatData.indexOf(item);
+              flatData.splice(index, 1);
+              removedItems.push(item);
+            }
+          }
+
+          if (removedItems.length > 0) {
+            const mergedItem = merge(removedItems, aggs);
+            mergedItem._isAggregation = true;
+            mergedItem._threshold = thresholdPercent;
+            flatData.push(mergedItem);
+          }
+        }
+        else {
+          const leaves = branch.values;
+          let n = leaves.length;
+          while (n--) {
+            thresholdByDepth(nextValues, leaves[n], depth + 1);
+          }
+        }
+      }
+
+      tree.forEach(branch => thresholdByDepth(flatData, branch, 0));
+
+      return flatData;
+    }
+
+    return data;
   }
 
   /**
