@@ -13,10 +13,7 @@ var data = [
   {"Group": "Restaurant", "Sub-Group": "Fast-Food Restaurant", "Number of Food Stores": 60, year: 2018},
   {"Group": "Restaurant", "Sub-Group": "Full-Service Restaurant", "Number of Food Stores": 120, year: 2018}
 ];
-```
-We can create a Pie Chart by passing an array of 2 keys to the groupBy property:
 
-```js
 var myChart = new d3plus.Pie()
   .config({
     data,
