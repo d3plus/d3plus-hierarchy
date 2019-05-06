@@ -1,6 +1,6 @@
-# Pie Chart Multiple Grouping
+# Pie Chart Grouping
 
-[Pie](http://d3plus.org/docs/#Pie) class can have multiple groupings by setting [groupBy](http://d3plus.org/docs/#Viz.groupBy) property to an array of keys you want to group your data by.
+To show groupings in a [Pie](http://d3plus.org/docs/#Pie) chart, set [groupBy](http://d3plus.org/docs/#Viz.groupBy) property to an array of keys you want to group the data by.
 
 Using following data:
 
@@ -14,7 +14,7 @@ var data = [
   {"Group": "Restaurant", "Sub-Group": "Full-Service Restaurant", "Number of Food Stores": 120, year: 2018}
 ];
 ```
-We can create a simple Pie Chart by passing an array of 2 keys to groupBy property:
+We can create a Pie Chart by passing an array of 2 keys to the groupBy property:
 
 ```js
 var myChart = new d3plus.Pie()

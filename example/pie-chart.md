@@ -1,6 +1,6 @@
 # Pie Chart
 
-When constructing data to be used with the [Pie](http://d3plus.org/docs/#Pie) class, there must be a unique data point for each pie. Given this data array:
+When constructing data to be used with the [Pie](http://d3plus.org/docs/#Pie) class, there must be a unique data point for each sector. Given this data array:
 
 ```js
 var data = [
