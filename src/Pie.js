@@ -78,6 +78,7 @@ export default class Pie extends Viz {
         x: 0,
         y: 0
       })
+      .label(this._drawLabel)
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Path"))
       .render());
 
