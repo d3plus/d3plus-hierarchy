@@ -44,7 +44,7 @@ export default class Treemap extends Viz {
     this._tile = treemapSquarify;
     this._treemap = treemap().round(true);
 
-    const isAggregated = (leaf) => leaf.children && leaf.children.length === 1 && leaf.children[0].data._isAggregation;
+    const isAggregated = leaf => leaf.children && leaf.children.length === 1 && leaf.children[0].data._isAggregation;
 
   }
 
@@ -56,7 +56,7 @@ export default class Treemap extends Viz {
   _draw(callback) {
 
     super._draw(callback);
-    
+
     let nestedData = nest();
     for (let i = 0; i <= this._drawDepth; i++) nestedData.key(this._groupBy[i]);
     nestedData = nestedData.entries(this._filteredData);
@@ -138,63 +138,75 @@ export default class Treemap extends Viz {
    * @param {Array} data The data to process.
    */
   _thresholdFunction(data, tree) {
-    if (this._threshold && this._thresholdKey) {
-      const aggs = this._aggs;
-      const drawDepth = this._drawDepth;
-      const groupBy = this._groupBy;
-      const threshold = this._threshold;
-      const thresholdKey = this._thresholdKey;
+    const aggs = this._aggs;
+    const drawDepth = this._drawDepth;
+    const groupBy = this._groupBy;
+    const threshold = this._threshold;
+    const thresholdKey = this._thresholdKey;
 
-      const flatData = data.slice();
-      const totalSum = sum(flatData, thresholdKey);
+    if (threshold && thresholdKey) {
+      const finalDataset = data.slice();
+      const totalSum = sum(finalDataset, this._thresholdKey);
 
-      function thresholdByDepth(values, branch, depth) {
-        if (depth >= drawDepth) return;
-
-        const accesor = groupBy[depth];
-        const nextValues = values.filter(item => accesor(item) === branch.key);
-
-        values.forEach(item => {
-          console.log(item.Year);
-        })
-
-        if (depth + 1 === drawDepth) {
-          const removedItems = [];
-          const thresholdPercent = Math.min(1, Math.max(0, threshold(nextValues)));
-
-          if (!isFinite(thresholdPercent) || isNaN(thresholdPercent)) return;
-
-          const thresholdValue = thresholdPercent * totalSum;
-
-          let n = nextValues.length;
-          while (n--) {
-            const item = nextValues[n];
-            if (thresholdKey(item) < thresholdValue) {
-              const index = flatData.indexOf(item);
-              flatData.splice(index, 1);
-              removedItems.push(item);
-            }
-          }
-
-          if (removedItems.length > 0) {
-            const mergedItem = merge(removedItems, aggs);
-            mergedItem._isAggregation = true;
-            mergedItem._threshold = thresholdPercent;
-            flatData.push(mergedItem);
-          }
-        }
-        else {
-          const leaves = branch.values;
-          let n = leaves.length;
-          while (n--) {
-            thresholdByDepth(nextValues, leaves[n], depth + 1);
-          }
-        }
+      let n = tree.length;
+      while (n--) {
+        const branch = tree[n];
+        thresholdByDepth(finalDataset, totalSum, data, branch, 0);
       }
 
-      tree.forEach(branch => thresholdByDepth(flatData, branch, 0));
+      return finalDataset;
+    }
 
-      return flatData;
+    /**
+     * @memberof Treemap
+     * @desc Explores the data tree recursively and merges elements under the indicated threshold.
+     * @param {object[]} finalDataset The array of data that will be returned after modifications.
+     * @param {number} totalSum The total sum of the values in the initial dataset.
+     * @param {object[]} currentDataset The current subset of the dataset to work on.
+     * @param {object} branch The branch of the dataset tree to explore.
+     * @param {number} depth The depth of the current branch.
+     * @private
+     */
+    function thresholdByDepth(finalDataset, totalSum, currentDataset, branch, depth) {
+      if (depth >= drawDepth) return;
+
+      const currentAccesor = groupBy[depth];
+      const nextDataset = currentDataset.filter(
+        item => currentAccesor(item) === branch.key
+      );
+
+      if (depth + 1 === drawDepth) {
+        const removedItems = [];
+        const thresholdPercent = Math.min(1, Math.max(0, threshold(nextDataset)));
+
+        if (!isFinite(thresholdPercent) || isNaN(thresholdPercent)) return;
+
+        const thresholdValue = thresholdPercent * totalSum;
+
+        let n = nextDataset.length;
+        while (n--) {
+          const item = nextDataset[n];
+          if (thresholdKey(item) < thresholdValue) {
+            const index = finalDataset.indexOf(item);
+            finalDataset.splice(index, 1);
+            removedItems.push(item);
+          }
+        }
+
+        if (removedItems.length > 0) {
+          const mergedItem = merge(removedItems, aggs);
+          mergedItem._isAggregation = true;
+          mergedItem._threshold = thresholdPercent;
+          finalDataset.push(mergedItem);
+        }
+      }
+      else {
+        const leaves = branch.values;
+        let n = leaves.length;
+        while (n--) {
+          thresholdByDepth(finalDataset, totalSum, nextDataset, leaves[n], depth + 1);
+        }
+      }
     }
 
     return data;
