@@ -67,6 +67,7 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ##### 
 * [nest](#nest) - Extends the base behavior of d3.nest to allow for multiple depth levels.
+* [_thresholdFunction](#_thresholdFunction) - Applies the threshold algorithm for Treemaps.
 
 ---
 
@@ -189,7 +190,7 @@ Uses the [d3 pie layout](https://github.com/d3/d3-shape#pies) to creates SVG arc
 
 
 
-<a name="Pie.innerRadius" href="#Pie.innerRadius">#</a> Pie.**innerRadius**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L92)
+<a name="Pie.innerRadius" href="#Pie.innerRadius">#</a> Pie.**innerRadius**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L93)
 
 If *value* is specified, sets the inner radius accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current inner radius accessor.
 
@@ -197,7 +198,7 @@ If *value* is specified, sets the inner radius accessor to the specified functio
 This is a static method of [<code>Pie</code>](#Pie).
 
 
-<a name="Pie.padAngle" href="#Pie.padAngle">#</a> Pie.**padAngle**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L101)
+<a name="Pie.padAngle" href="#Pie.padAngle">#</a> Pie.**padAngle**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L102)
 
 If *value* is specified, sets the arc padding to the specified radian value and returns the current class instance. If *value* is not specified, returns the current radian padding.
 
@@ -205,7 +206,7 @@ If *value* is specified, sets the arc padding to the specified radian value and 
 This is a static method of [<code>Pie</code>](#Pie).
 
 
-<a name="Pie.padPixel" href="#Pie.padPixel">#</a> Pie.**padPixel**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L110)
+<a name="Pie.padPixel" href="#Pie.padPixel">#</a> Pie.**padPixel**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L111)
 
 If *value* is specified, sets the arc padding to the specified pixel value and returns the current class instance. If *value* is not specified, returns the current pixel padding.
 
@@ -213,7 +214,7 @@ If *value* is specified, sets the arc padding to the specified pixel value and r
 This is a static method of [<code>Pie</code>](#Pie).
 
 
-<a name="Pie.sort" href="#Pie.sort">#</a> Pie.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L123)
+<a name="Pie.sort" href="#Pie.sort">#</a> Pie.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L124)
 
 If *comparator* is specified, sets the sort order for the pie slices using the specified comparator function. If *comparator* is not specified, returns the current sort order, which defaults to descending order by the associated input data's numeric value attribute.
 
@@ -228,7 +229,7 @@ function comparator(a, b) {
 ```
 
 
-<a name="Pie.value" href="#Pie.value">#</a> Pie.**value**(*value*) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L136)
+<a name="Pie.value" href="#Pie.value">#</a> Pie.**value**(*value*) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L137)
 
 If *value* is specified, sets the value accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current value accessor.
 
@@ -293,7 +294,7 @@ function separation(a, b) {
 ---
 
 <a name="Treemap"></a>
-#### **Treemap** [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L8)
+#### **Treemap** [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L9)
 
 
 This is a global class, and extends all of the methods and functionality of <code>Viz</code>.
@@ -315,7 +316,7 @@ Uses the [d3 treemap layout](https://github.com/mbostock/d3/wiki/Treemap-Layout)
 
 
 
-<a name="Treemap.layoutPadding" href="#Treemap.layoutPadding">#</a> Treemap.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L132)
+<a name="Treemap.layoutPadding" href="#Treemap.layoutPadding">#</a> Treemap.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L220)
 
 If *value* is specified, sets the inner and outer padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current padding accessor.
 
@@ -323,7 +324,7 @@ If *value* is specified, sets the inner and outer padding accessor to the specif
 This is a static method of [<code>Treemap</code>](#Treemap).
 
 
-<a name="Treemap.sort" href="#Treemap.sort">#</a> Treemap.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L145)
+<a name="Treemap.sort" href="#Treemap.sort">#</a> Treemap.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L233)
 
 If *comparator* is specified, sets the sort order for the treemap using the specified comparator function. If *comparator* is not specified, returns the current group sort order, which defaults to descending order by the associated input data's numeric value attribute.
 
@@ -338,7 +339,7 @@ function comparator(a, b) {
 ```
 
 
-<a name="Treemap.sum" href="#Treemap.sum">#</a> Treemap.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L158)
+<a name="Treemap.sum" href="#Treemap.sum">#</a> Treemap.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L246)
 
 If *value* is specified, sets the sum accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current sum accessor.
 
@@ -353,7 +354,7 @@ function sum(d) {
 ```
 
 
-<a name="Treemap.tile" href="#Treemap.tile">#</a> Treemap.**tile**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L167)
+<a name="Treemap.tile" href="#Treemap.tile">#</a> Treemap.**tile**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L260)
 
 If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling) to the specified function and returns the current class instance. If *value* is not specified, returns the current [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling).
 
@@ -376,6 +377,16 @@ This is a global function.
 
 ---
 
+<a name="_thresholdFunction"></a>
+#### d3plus.**_thresholdFunction**(data) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L140)
+
+Applies the threshold algorithm for Treemaps.
 
 
-###### <sub>Documentation generated on Thu, 03 Jan 2019 22:57:49 GMT</sub>
+This is a global function.
+
+---
+
+
+
+###### <sub>Documentation generated on Wed, 08 May 2019 19:54:13 GMT</sub>
