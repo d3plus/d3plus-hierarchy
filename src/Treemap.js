@@ -1,3 +1,4 @@
+import {sum} from "d3-array";
 import {nest} from "d3-collection";
 import {hierarchy, treemap, treemapSquarify} from "d3-hierarchy";
 
@@ -33,10 +34,17 @@ export default class Treemap extends Viz {
         padding: 15
       }
     });
-    this._sort = (a, b) => b.value - a.value;
+    this._sort = (a, b) => {
+      const aggA = isAggregated(a);
+      const aggB = isAggregated(b);
+      return aggA && !aggB ? 1 : !aggA && aggB ? -1 : b.value - a.value;
+    };
     this._sum = accessor("value");
+    this._thresholdKey = this._sum;
     this._tile = treemapSquarify;
     this._treemap = treemap().round(true);
+
+    const isAggregated = leaf => leaf.children && leaf.children.length === 1 && leaf.children[0].data._isAggregation;
 
   }
 
@@ -48,7 +56,7 @@ export default class Treemap extends Viz {
   _draw(callback) {
 
     super._draw(callback);
-    
+
     let nestedData = nest();
     for (let i = 0; i <= this._drawDepth; i++) nestedData.key(this._groupBy[i]);
     nestedData = nestedData.entries(this._filteredData);
@@ -74,9 +82,10 @@ export default class Treemap extends Viz {
         const node = children[i];
         if (node.depth <= that._drawDepth) extractLayout(node.children);
         else {
+          const index = node.data.values.length === 1 ? that._filteredData.indexOf(node.data.values[0]) : undefined;
           node.__d3plus__ = true;
           node.id = node.data.key;
-          node.i = node.data.values.length === 1 && that._filteredData.includes(node.data.values[0]) ? that._filteredData.indexOf(node.data.values[0]) : undefined;
+          node.i = index > -1 ? index : undefined;
           node.data = merge(node.data.values);
           node.x = node.x0 + (node.x1 - node.x0) / 2;
           node.y = node.y0 + (node.y1 - node.y0) / 2;
@@ -125,6 +134,85 @@ export default class Treemap extends Viz {
   }
 
   /**
+   * Applies the threshold algorithm for Treemaps.
+   * @param {Array} data The data to process.
+   */
+  _thresholdFunction(data, tree) {
+    const aggs = this._aggs;
+    const drawDepth = this._drawDepth;
+    const groupBy = this._groupBy;
+    const threshold = this._threshold;
+    const thresholdKey = this._thresholdKey;
+
+    if (threshold && thresholdKey) {
+      const finalDataset = data.slice();
+      const totalSum = sum(finalDataset, this._thresholdKey);
+
+      let n = tree.length;
+      while (n--) {
+        const branch = tree[n];
+        thresholdByDepth(finalDataset, totalSum, data, branch, 0);
+      }
+
+      return finalDataset;
+    }
+
+    /**
+     * @memberof Treemap
+     * @desc Explores the data tree recursively and merges elements under the indicated threshold.
+     * @param {object[]} finalDataset The array of data that will be returned after modifications.
+     * @param {number} totalSum The total sum of the values in the initial dataset.
+     * @param {object[]} currentDataset The current subset of the dataset to work on.
+     * @param {object} branch The branch of the dataset tree to explore.
+     * @param {number} depth The depth of the current branch.
+     * @private
+     */
+    function thresholdByDepth(finalDataset, totalSum, currentDataset, branch, depth) {
+      if (depth >= drawDepth) return;
+
+      const currentAccesor = groupBy[depth];
+      const nextDataset = currentDataset.filter(
+        item => currentAccesor(item) === branch.key
+      );
+
+      if (depth + 1 === drawDepth) {
+        const removedItems = [];
+        const thresholdPercent = Math.min(1, Math.max(0, threshold(nextDataset)));
+
+        if (!isFinite(thresholdPercent) || isNaN(thresholdPercent)) return;
+
+        const thresholdValue = thresholdPercent * totalSum;
+
+        let n = nextDataset.length;
+        while (n--) {
+          const item = nextDataset[n];
+          if (thresholdKey(item) < thresholdValue) {
+            const index = finalDataset.indexOf(item);
+            finalDataset.splice(index, 1);
+            removedItems.push(item);
+          }
+        }
+
+        if (removedItems.length > 0) {
+          const mergedItem = merge(removedItems, aggs);
+          mergedItem._isAggregation = true;
+          mergedItem._threshold = thresholdPercent;
+          finalDataset.push(mergedItem);
+        }
+      }
+      else {
+        const leaves = branch.values;
+        let n = leaves.length;
+        while (n--) {
+          thresholdByDepth(finalDataset, totalSum, nextDataset, leaves[n], depth + 1);
+        }
+      }
+    }
+
+    return data;
+  }
+
+  /**
       @memberof Treemap
       @desc If *value* is specified, sets the inner and outer padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current padding accessor.
       @param {Function|Number} [*value*]
@@ -156,7 +244,12 @@ function sum(d) {
 }
   */
   sum(_) {
-    return arguments.length ? (this._sum = typeof _ === "function" ? _ : accessor(_), this) : this._sum;
+    if (arguments.length) {
+      this._sum = typeof _ === "function" ? _ : accessor(_);
+      this._thresholdKey = this._sum;
+      return this;
+    }
+    else return this._sum;
   }
 
   /**
