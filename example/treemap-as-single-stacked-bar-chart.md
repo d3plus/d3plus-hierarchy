@@ -7,7 +7,7 @@ To change the tiling method of a [Treemap](http://d3plus.org/docs/#Treemap), you
 ```
 
 ```js
-var data = [
+var myData = [
   {"Group": "Store", "Sub-Group": "Convenience Store", "Number of Stores": 100, year: 2018},
   {"Group": "Store", "Sub-Group": "Grocery Store", "Number of Food Stores": 150, year: 2018},
   {"Group": "Store", "Sub-Group": "Farmer's Market", "Number of Food Stores": 50, year: 2018},
@@ -18,7 +18,7 @@ var data = [
 
 new d3plus.Treemap()
   .config({
-    data,
+    data: myData,
     groupBy: ["Group", "Sub-Group"],
     sum: d => d["Number of Food Stores"],
     tooltipConfig: {
