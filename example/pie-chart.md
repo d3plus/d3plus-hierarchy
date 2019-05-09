@@ -4,17 +4,17 @@ When constructing data to be used with the [Pie](http://d3plus.org/docs/#Pie) cl
 
 ```js
 var data = [
-  {"Race": "White Health Center Patients", "Population Percentage": 40, year: 2018},
-  {"Race": "Black Health Center Patients", "Population Percentage": 20, year: 2018},
-  {"Race": "Hispanic Health Center Patients", "Population Percentage": 25, year: 2018},
-  {"Race": "Asian Health Center Patients", "Population Percentage": 10, year: 2018},
-  {"Race": "American Indian Health Center Patients", "Population Percentage": 5, year: 2018}
+  {"Race": "White Health Center Patients", "Population Percentage": 40},
+  {"Race": "Black Health Center Patients", "Population Percentage": 20},
+  {"Race": "Hispanic Health Center Patients", "Population Percentage": 25},
+  {"Race": "Asian Health Center Patients", "Population Percentage": 10},
+  {"Race": "American Indian Health Center Patients", "Population Percentage": 5}
 ];
 ```
 We can create a simple Pie Chart:
 
 ```js
-var myChart = new d3plus.Pie()
+new d3plus.Pie()
   .config({
     data,
     groupBy: "Race",

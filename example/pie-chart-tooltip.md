@@ -1,6 +1,6 @@
 # Pie Chart Tooltip
 
-To set custom tooltip in a [Pie](http://d3plus.org/docs/#Pie) class, set the `tbody` property of [tooltipConfig](http://d3plus.org/docs/#Viz.tooltipConfig) to an array of 2 values. First item in this array is the label and second item is the label value. Using following data:
+To show data in a [Pie](http://d3plus.org/docs/#Pie) chart tooltip, use the `tbody` property of the [tooltipConfig](http://d3plus.org/docs/#Viz.tooltipConfig) to define each row in a table as an Array of column values.
 
 ```js
 var data = [
@@ -15,13 +15,18 @@ var data = [
 We can create a simple Pie Chart with a custom tooltip:
 
 ```js
-var myChart = new d3plus.Pie()
+new d3plus.Pie()
   .config({
     data,
     groupBy: ["Group", "Sub-Group"],
-    value: d => d["Number of Food Stores"],
+    value: function(d) {
+      return d["Number of Food Stores"];
+    },
     tooltipConfig: {
-      tbody: [["Total", d => d["Number of Food Stores"]], ["Year", d => d.year]]
+      tbody: [
+        ["Total", function(d) { return d["Number of Food Stores"] }], 
+        ["Year", function(d) { return d.year }]
+      ]
     },
   })
   .render();

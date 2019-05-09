@@ -1,11 +1,12 @@
-# Treemap as Single Stacked Barchart
+# Changing the Treemap Tiling Method
 
-To construct a [Treemap](http://d3plus.org/docs/#Treemap) as a single stacked barchart, you need to import `treemapDice` from D3 library and set it to the tile property, as shown:
+To change the tiling method of a [Treemap](http://d3plus.org/docs/#Treemap), you need to import a specific tiling method from D3 and pass it to the tile property. This example uses the [`treemapDice`](https://github.com/d3/d3-hierarchy#treemapDice) method to create the appearance of a horizontal stacked bar:
+
+```html
+<script src="https://d3js.org/d3-hierarchy.v1.min.js"></script>
+```
 
 ```js
-<script src="https://d3js.org/d3-hierarchy.v1.min.js"></script>
-var treemapDice = d3.treemapDice;
-
 var data = [
   {"Group": "Store", "Sub-Group": "Convenience Store", "Number of Stores": 100, year: 2018},
   {"Group": "Store", "Sub-Group": "Grocery Store", "Number of Food Stores": 150, year: 2018},
@@ -21,9 +22,12 @@ new d3plus.Treemap()
     groupBy: ["Group", "Sub-Group"],
     sum: d => d["Number of Food Stores"],
     tooltipConfig: {
-      tbody: [["Total", d => d["Number of Food Stores"]], ["Year", d => d.year]]
+      tbody: [
+        ["Total", function(d) { return d["Number of Food Stores"] }], 
+        ["Year", function(d) { return d.year }]
+      ]
     },
-    tile: treemapDice
+    tile: d3.treemapDice
   })
   .render();
 ```
