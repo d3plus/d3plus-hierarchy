@@ -20,7 +20,9 @@ new d3plus.Treemap()
   .config({
     data: myData,
     groupBy: ["Group", "Sub-Group"],
-    sum: d => d["Number of Food Stores"],
+    sum: function(d) {
+      return d["Number of Food Stores"];
+    },
     tooltipConfig: {
       tbody: [
         ["Total", function(d) { return d["Number of Food Stores"] }], 

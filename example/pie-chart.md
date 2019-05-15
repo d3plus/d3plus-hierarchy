@@ -18,7 +18,9 @@ new d3plus.Pie()
   .config({
     data: myData,
     groupBy: "Race",
-    value: d => d["Population Percentage"]
+    value: function(d) {
+      return d["Population Percentage"];
+    }
   })
   .render();
 ```

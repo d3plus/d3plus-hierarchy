@@ -16,7 +16,9 @@ new d3plus.Pie()
   .config({
     data: myData,
     groupBy: ["Group", "Sub-Group"],
-    value: d => d["Number of Food Stores"]
+    value: function(d) {
+      return d["Number of Food Stores"];
+    }
   })
   .render();
 ```
