@@ -4,9 +4,9 @@ All of the shapes drawn by d3plus visualizations are instances of  [d3plus-shape
 
 ```js
 var data = [
-  {id: "alpha", value: 29, image: "https://datausa.io/static/img/attrs/thing_apple.png"},
-  {id: "beta",  value: 10, image: "https://datausa.io/static/img/attrs/thing_fish.png"},
-  {id: "gamma", value: 2,  image: "https://datausa.io/static/img/attrs/thing_tomato.png"}
+  {id: "alpha", value: 29, image: "https://datausa.io/images/attrs/thing_apple.png"},
+  {id: "beta",  value: 10, image: "https://datausa.io/images/attrs/thing_fish.png"},
+  {id: "gamma", value: 2,  image: "https://datausa.io/images/attrs/thing_tomato.png"}
 ];
 ```
 
