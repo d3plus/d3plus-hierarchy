@@ -4,7 +4,7 @@ To show groupings in a [Pie](http://d3plus.org/docs/#Pie) chart, set the [groupB
 
 ```js
 var myData = [
-  {"Group": "Store", "Sub-Group": "Convenience Store", "Number of Stores": 100},
+  {"Group": "Store", "Sub-Group": "Convenience Store", "Number of Food Stores": 100},
   {"Group": "Store", "Sub-Group": "Grocery Store", "Number of Food Stores": 150},
   {"Group": "Store", "Sub-Group": "Farmer's Market", "Number of Food Stores": 50},
   {"Group": "Store", "Sub-Group": "Supercenters", "Number of Food Stores": 30},

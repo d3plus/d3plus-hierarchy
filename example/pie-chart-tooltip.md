@@ -4,7 +4,7 @@ To show data in a [Pie](http://d3plus.org/docs/#Pie) chart tooltip, use the `tbo
 
 ```js
 var myData = [
-  {"Group": "Store", "Sub-Group": "Convenience Store", "Number of Stores": 100, year: 2018},
+  {"Group": "Store", "Sub-Group": "Convenience Store", "Number of Food Stores": 100, year: 2018},
   {"Group": "Store", "Sub-Group": "Grocery Store", "Number of Food Stores": 150, year: 2018},
   {"Group": "Store", "Sub-Group": "Farmer's Market", "Number of Food Stores": 50, year: 2018},
   {"Group": "Store", "Sub-Group": "Supercenters", "Number of Food Stores": 30, year: 2018},
@@ -24,10 +24,10 @@ new d3plus.Pie()
     },
     tooltipConfig: {
       tbody: [
-        ["Total", function(d) { return d["Number of Food Stores"] }], 
+        ["Total", function(d) { return d["Number of Food Stores"] }],
         ["Year", function(d) { return d.year }]
       ]
-    },
+    }
   })
   .render();
 ```
