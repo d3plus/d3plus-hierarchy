@@ -1,6 +1,6 @@
 # d3plus-hierarchy
 
-[![NPM Release](http://img.shields.io/npm/v/d3plus-hierarchy.svg?style=flat)](https://www.npmjs.org/package/d3plus-hierarchy) [![Build Status](https://travis-ci.org/d3plus/d3plus-hierarchy.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-hierarchy) [![Dependency Status](http://img.shields.io/david/d3plus/d3plus-hierarchy.svg?style=flat)](https://david-dm.org/d3plus/d3plus-hierarchy) [![Gitter](https://img.shields.io/badge/-chat_on_gitter-brightgreen.svg?style=flat&logo=gitter-white)](https://gitter.im/d3plus/) [![1.0 progress](https://img.shields.io/badge/1.0_progress-33%25-orange.svg?style=flat)](https://github.com/d3plus/d3plus-hierarchy/projects/1)
+[![NPM Release](http://img.shields.io/npm/v/d3plus-hierarchy.svg?style=flat)](https://www.npmjs.org/package/d3plus-hierarchy) [![Build Status](https://travis-ci.org/d3plus/d3plus-hierarchy.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-hierarchy) [![Dependency Status](http://img.shields.io/david/d3plus/d3plus-hierarchy.svg?style=flat)](https://david-dm.org/d3plus/d3plus-hierarchy) [![Gitter](https://img.shields.io/badge/-chat_on_gitter-brightgreen.svg?style=flat&logo=gitter-white)](https://gitter.im/d3plus/) [![1.0 progress](https://img.shields.io/badge/1.0_progress-40%25-orange.svg?style=flat)](https://github.com/d3plus/d3plus-hierarchy/projects/1)
 
 Nested, hierarchical, and cluster charts built on D3
 
@@ -47,6 +47,10 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
+ * [Pie Chart](http://d3plus.org/examples/d3plus-hierarchy/pie-chart/)<sup> ***New***</sup>
+ * [Changing the Treemap Tiling Method](http://d3plus.org/examples/d3plus-hierarchy/treemap-as-single-stacked-bar-chart/)<sup> ***New***</sup>
+ * [Pie Chart Grouping](http://d3plus.org/examples/d3plus-hierarchy/pie-chart-multigrouping/)<sup> ***New***</sup>
+ * [Pie Chart Tooltip](http://d3plus.org/examples/d3plus-hierarchy/pie-chart-tooltip/)<sup> ***New***</sup>
  * [Circle Packing Chart](http://d3plus.org/examples/d3plus-hierarchy/pack/)
  * [Hiding Tooltip on Click](http://d3plus.org/examples/d3plus-hierarchy/hiding-tooltip-on-click/)
  * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)
@@ -316,7 +320,7 @@ Uses the [d3 treemap layout](https://github.com/mbostock/d3/wiki/Treemap-Layout)
 
 
 
-<a name="Treemap.layoutPadding" href="#Treemap.layoutPadding">#</a> Treemap.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L220)
+<a name="Treemap.layoutPadding" href="#Treemap.layoutPadding">#</a> Treemap.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L234)
 
 If *value* is specified, sets the inner and outer padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current padding accessor.
 
@@ -324,7 +328,7 @@ If *value* is specified, sets the inner and outer padding accessor to the specif
 This is a static method of [<code>Treemap</code>](#Treemap).
 
 
-<a name="Treemap.sort" href="#Treemap.sort">#</a> Treemap.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L233)
+<a name="Treemap.sort" href="#Treemap.sort">#</a> Treemap.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L247)
 
 If *comparator* is specified, sets the sort order for the treemap using the specified comparator function. If *comparator* is not specified, returns the current group sort order, which defaults to descending order by the associated input data's numeric value attribute.
 
@@ -339,7 +343,7 @@ function comparator(a, b) {
 ```
 
 
-<a name="Treemap.sum" href="#Treemap.sum">#</a> Treemap.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L246)
+<a name="Treemap.sum" href="#Treemap.sum">#</a> Treemap.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L260)
 
 If *value* is specified, sets the sum accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current sum accessor.
 
@@ -354,7 +358,7 @@ function sum(d) {
 ```
 
 
-<a name="Treemap.tile" href="#Treemap.tile">#</a> Treemap.**tile**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L260)
+<a name="Treemap.tile" href="#Treemap.tile">#</a> Treemap.**tile**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L274)
 
 If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling) to the specified function and returns the current class instance. If *value* is not specified, returns the current [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling).
 
@@ -378,7 +382,7 @@ This is a global function.
 ---
 
 <a name="_thresholdFunction"></a>
-#### d3plus.**_thresholdFunction**(data) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L140)
+#### d3plus.**_thresholdFunction**(data) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L154)
 
 Applies the threshold algorithm for Treemaps.
 
@@ -389,4 +393,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Wed, 08 May 2019 19:54:13 GMT</sub>
+###### <sub>Documentation generated on Fri, 17 May 2019 15:42:13 GMT</sub>
