@@ -121,8 +121,22 @@ export default class Treemap extends Viz {
           ];
         },
         labelConfig: {
-          textAnchor: d => d.l ? "middle" : "start",
-          verticalAlign: d => d.l ? "bottom" : "top"
+          textAnchor: (d, i, x) => {
+            let line, parent = x;
+            while (typeof line === "undefined" && parent) {
+              if (typeof parent.l !== "undefined") line = parent.l;
+              parent = parent.__d3plusParent__;
+            }
+            return line ? "middle" : "start";
+          },
+          verticalAlign: (d, i, x) => {
+            let line, parent = x;
+            while (typeof line === "undefined" && parent) {
+              if (typeof parent.l !== "undefined") line = parent.l;
+              parent = parent.__d3plusParent__;
+            }
+            return line ? "bottom" : "top";
+          }
         },
         width: d => d.x1 - d.x0
       })
