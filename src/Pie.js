@@ -30,6 +30,7 @@ export default class Pie extends Viz {
       }
     });
     this._innerRadius = 0;
+    this._legendSort = (a, b) => this._value(b) - this._value(a);
     this._padPixel = 0;
     this._pie = pie();
     this._sort = (a, b) => this._value(b) - this._value(a);
