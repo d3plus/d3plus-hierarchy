@@ -3,6 +3,7 @@ import {nest} from "d3-collection";
 import {hierarchy, treemap, treemapSquarify} from "d3-hierarchy";
 
 import {accessor, assign, configPrep, constant, elem, merge} from "d3plus-common";
+import {formatAbbreviate} from "d3plus-format";
 import {Rect} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
@@ -31,8 +32,9 @@ export default class Treemap extends Viz {
       },
       labelConfig: {
         fontMax: 20,
+        fontMin: 8,
         fontResize: true,
-        padding: 15
+        padding: 5
       }
     });
     this._sort = (a, b) => {
@@ -100,11 +102,14 @@ export default class Treemap extends Viz {
     const total = tmapData.value;
 
     const transform = `translate(${this._margin.left}, ${this._margin.top})`;
+    const rectConfig = configPrep.bind(this)(this._shapeConfig, "shape", "Rect");
+    const fontMin = rectConfig.labelConfig.fontMin;
+    const padding = rectConfig.labelConfig.padding;
     this._shapes.push(new Rect()
       .data(shapeData)
       .label(d => [
         this._drawLabel(d.data, d.i),
-        `${Math.round(this._sum(d.data, d.i) / total * 100)}%`
+        `${formatAbbreviate(this._sum(d.data, d.i) / total * 100)}%`
       ])
       .select(elem("g.d3plus-Treemap", {
         parent: this._select,
@@ -115,10 +120,11 @@ export default class Treemap extends Viz {
         height: d => d.y1 - d.y0,
         labelBounds: (d, i, s) => {
           const h = s.height;
-          const sh = Math.min(50, h * 0.25);
+          let sh = Math.min(50, (h - padding * 2) * 0.5);
+          if (sh < fontMin) sh = 0;
           return [
             {width: s.width, height: h - sh, x: -s.width / 2, y: -h / 2},
-            {width: s.width, height: sh, x: -s.width / 2, y: h / 2 - sh}
+            {width: s.width, height: sh + padding * 2, x: -s.width / 2, y: h / 2 - sh - padding * 2}
           ];
         },
         labelConfig: {
@@ -141,7 +147,7 @@ export default class Treemap extends Viz {
         },
         width: d => d.x1 - d.x0
       })
-      .config(configPrep.bind(this)(this._shapeConfig, "shape", "Rect"))
+      .config(rectConfig)
       .render());
 
     return this;
