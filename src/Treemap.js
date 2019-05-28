@@ -14,15 +14,16 @@ import {Viz} from "d3plus-viz";
 export default class Treemap extends Viz {
 
   /**
-      @memberof Treemap
-      @desc Invoked when creating a new class instance, and sets any default parameters.
-      @private
+    @memberof Treemap
+    @desc Invoked when creating a new class instance, and sets any default parameters.
+    @private
   */
   constructor() {
 
     super();
 
     this._layoutPadding = 1;
+    this._legendSort = (a, b) => this._sum(b) - this._sum(a);
     this._shapeConfig = assign({}, this._shapeConfig, {
       ariaLabel: (d, i) => {
         const rank = this._rankData ? `${this._rankData.indexOf(d) + 1}. ` : "";
