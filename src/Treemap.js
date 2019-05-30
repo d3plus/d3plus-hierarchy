@@ -114,7 +114,7 @@ export default class Treemap extends Viz {
       .data(shapeData)
       .label(d => [
         this._drawLabel(d.data, d.i),
-        `${formatAbbreviate(this._sum(d.data, d.i) / total * 100)}%`
+        `${formatAbbreviate(this._sum(d.data, d.i) / total, this._locale, "%")}`
       ])
       .select(elem("g.d3plus-Treemap", {
         parent: this._select,
