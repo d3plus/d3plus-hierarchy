@@ -105,6 +105,11 @@ export default class Treemap extends Viz {
     const rectConfig = configPrep.bind(this)(this._shapeConfig, "shape", "Rect");
     const fontMin = rectConfig.labelConfig.fontMin;
     const padding = rectConfig.labelConfig.padding;
+
+    shapeData.forEach(d => {
+      d.data.__d3plusShare__ = this._sum(d.data, d.i) / total;
+    });
+
     this._shapes.push(new Rect()
       .data(shapeData)
       .label(d => [
