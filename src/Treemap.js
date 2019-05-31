@@ -100,6 +100,9 @@ export default class Treemap extends Viz {
 
     this._rankData = shapeData.sort(this._sort).map(d => d.data);
     const total = tmapData.value;
+    shapeData.forEach(d => {
+      d.share = this._sum(d.data, d.i) / total;
+    });
 
     const transform = `translate(${this._margin.left}, ${this._margin.top})`;
     const rectConfig = configPrep.bind(this)(this._shapeConfig, "shape", "Rect");
