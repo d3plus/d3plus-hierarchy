@@ -106,15 +106,11 @@ export default class Treemap extends Viz {
     const fontMin = rectConfig.labelConfig.fontMin;
     const padding = rectConfig.labelConfig.padding;
 
-    shapeData.forEach(d => {
-      d.data.__d3plusShare__ = this._sum(d.data, d.i) / total;
-    });
-
     this._shapes.push(new Rect()
       .data(shapeData)
       .label(d => [
         this._drawLabel(d.data, d.i),
-        `${formatAbbreviate(this._sum(d.data, d.i) / total, this._locale, "%")}`
+        `${formatAbbreviate(this._sum(d.data, d.i) / total * 100, this._locale)}%`
       ])
       .select(elem("g.d3plus-Treemap", {
         parent: this._select,
