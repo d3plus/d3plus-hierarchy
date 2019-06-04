@@ -45,6 +45,11 @@ export default class Treemap extends Viz {
     this._sum = accessor("value");
     this._thresholdKey = this._sum;
     this._tile = treemapSquarify;
+    this._tooltipConfig = assign({}, this._tooltipConfig, {
+      tbody: [
+        ["Share", (d, i, x) => `${formatAbbreviate(x.share * 100, this._locale)}%`]
+      ]
+    });
     this._treemap = treemap().round(true);
 
     const isAggregated = leaf => leaf.children && leaf.children.length === 1 && leaf.children[0].data._isAggregation;
@@ -100,16 +105,20 @@ export default class Treemap extends Viz {
 
     this._rankData = shapeData.sort(this._sort).map(d => d.data);
     const total = tmapData.value;
+    shapeData.forEach(d => {
+      d.share = this._sum(d.data, d.i) / total;
+    });
 
     const transform = `translate(${this._margin.left}, ${this._margin.top})`;
     const rectConfig = configPrep.bind(this)(this._shapeConfig, "shape", "Rect");
     const fontMin = rectConfig.labelConfig.fontMin;
     const padding = rectConfig.labelConfig.padding;
+
     this._shapes.push(new Rect()
       .data(shapeData)
       .label(d => [
         this._drawLabel(d.data, d.i),
-        `${formatAbbreviate(this._sum(d.data, d.i) / total * 100)}%`
+        `${formatAbbreviate(d.share * 100, this._locale)}%`
       ])
       .select(elem("g.d3plus-Treemap", {
         parent: this._select,
