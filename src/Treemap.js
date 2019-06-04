@@ -45,6 +45,11 @@ export default class Treemap extends Viz {
     this._sum = accessor("value");
     this._thresholdKey = this._sum;
     this._tile = treemapSquarify;
+    this._tooltipConfig = assign({}, this._tooltipConfig, {
+      tbody: [
+        ["Share", (d, i, x) => `${formatAbbreviate(x.share * 100, this._locale)}%`]
+      ]
+    });
     this._treemap = treemap().round(true);
 
     const isAggregated = leaf => leaf.children && leaf.children.length === 1 && leaf.children[0].data._isAggregation;
