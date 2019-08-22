@@ -50,7 +50,7 @@ export default class Treemap extends Viz {
     this._tile = treemapSquarify;
     this._tooltipConfig = assign({}, this._tooltipConfig, {
       tbody: [
-        ["Share", (d, i, x) => `${formatAbbreviate(x.share * 100, this._locale)}%`]
+        [() => this._translate("Share"), (d, i, x) => `${formatAbbreviate(x.share * 100, this._locale)}%`]
       ]
     });
     this._treemap = treemap().round(true);
