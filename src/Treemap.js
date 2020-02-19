@@ -170,59 +170,53 @@ export default class Treemap extends Viz {
    * Applies the threshold algorithm for Treemaps.
    * @param {Array} data The data to process.
    */
-  _thresholdFunction(data, tree) {
+  _thresholdFunction(data) {
     const aggs = this._aggs;
     const drawDepth = this._drawDepth;
     const groupBy = this._groupBy;
     const threshold = this._threshold;
     const thresholdKey = this._thresholdKey;
 
+    const totalSum = sum(data, thresholdKey);
+
     if (threshold && thresholdKey) {
-      const finalDataset = data.slice();
-      const totalSum = sum(finalDataset, this._thresholdKey);
-
-      let n = tree.length;
-      while (n--) {
-        const branch = tree[n];
-        thresholdByDepth(finalDataset, totalSum, data, branch, 0);
-      }
-
-      return finalDataset;
+      return thresholdByDepth(data, 0);
     }
 
     /**
      * @memberof Treemap
      * @desc Explores the data tree recursively and merges elements under the indicated threshold.
-     * @param {object[]} finalDataset The array of data that will be returned after modifications.
-     * @param {number} totalSum The total sum of the values in the initial dataset.
-     * @param {object[]} currentDataset The current subset of the dataset to work on.
-     * @param {object} branch The branch of the dataset tree to explore.
+     * @param {object[]} branchData The current subset of the dataset to work on.
      * @param {number} depth The depth of the current branch.
      * @private
      */
-    function thresholdByDepth(finalDataset, totalSum, currentDataset, branch, depth) {
-      if (depth >= drawDepth) return;
-
-      const currentAccesor = groupBy[depth];
-      const nextDataset = currentDataset.filter(
-        item => currentAccesor(item) === branch.key
-      );
-
-      if (depth + 1 === drawDepth) {
+    function thresholdByDepth(branchData, depth) {
+      if (depth < drawDepth) {
+        return nest()
+          .key(groupBy[depth])
+          .entries(branchData)
+          .reduce((bulk, leaf) => {
+            const subBranchData = thresholdByDepth(leaf.values, depth + 1);
+            return bulk.concat(subBranchData);
+          }, []);
+      }
+      
+      if (depth === drawDepth) {
+        const thresholdPercent = Math.min(1, Math.max(0, threshold(branchData)));
+        
+        if (!isFinite(thresholdPercent) || isNaN(thresholdPercent)) return null;
+        
         const removedItems = [];
-        const thresholdPercent = Math.min(1, Math.max(0, threshold(nextDataset)));
-
-        if (!isFinite(thresholdPercent) || isNaN(thresholdPercent)) return;
-
+        const branchDataCopy = branchData.slice();
         const thresholdValue = thresholdPercent * totalSum;
 
-        let n = nextDataset.length;
+        let n = branchDataCopy.length;
         while (n--) {
-          const item = nextDataset[n];
-          if (thresholdKey(item) < thresholdValue) {
-            const index = finalDataset.indexOf(item);
-            finalDataset.splice(index, 1);
-            removedItems.push(item);
+          const datum = branchDataCopy[n];
+          if (thresholdKey(datum) < thresholdValue) {
+            const index = branchDataCopy.indexOf(datum);
+            branchDataCopy.splice(index, 1);
+            removedItems.push(datum);
           }
         }
 
@@ -230,16 +224,13 @@ export default class Treemap extends Viz {
           const mergedItem = merge(removedItems, aggs);
           mergedItem._isAggregation = true;
           mergedItem._threshold = thresholdPercent;
-          finalDataset.push(mergedItem);
+          branchDataCopy.push(mergedItem);
         }
+
+        return branchDataCopy;
       }
-      else {
-        const leaves = branch.values;
-        let n = leaves.length;
-        while (n--) {
-          thresholdByDepth(finalDataset, totalSum, nextDataset, leaves[n], depth + 1);
-        }
-      }
+
+      throw new Error("Depth is higher than the amount of grouping levels.");
     }
 
     return data;
