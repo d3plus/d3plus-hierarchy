@@ -97,7 +97,7 @@ export default class Treemap extends Viz {
           node.__d3plus__ = true;
           node.id = node.data.key;
           node.i = index > -1 ? index : undefined;
-          node.data = merge(node.data.values);
+          node.data = merge(node.data.values, that._aggs);
           node.x = node.x0 + (node.x1 - node.x0) / 2;
           node.y = node.y0 + (node.y1 - node.y0) / 2;
           shapeData.push(node);
@@ -200,12 +200,12 @@ export default class Treemap extends Viz {
             return bulk.concat(subBranchData);
           }, []);
       }
-      
+
       if (depth === drawDepth) {
         const thresholdPercent = Math.min(1, Math.max(0, threshold(branchData)));
-        
+
         if (!isFinite(thresholdPercent) || isNaN(thresholdPercent)) return null;
-        
+
         const removedItems = [];
         const branchDataCopy = branchData.slice();
         const thresholdValue = thresholdPercent * totalSum;
