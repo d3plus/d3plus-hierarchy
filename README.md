@@ -9,7 +9,7 @@ Nested, hierarchical, and cluster charts built on D3
 If you use NPM, run `npm install d3plus-hierarchy --save`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-hierarchy/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. You can also load directly from [d3plus.org](https://d3plus.org):
 
 ```html
-<script src="https://d3plus.org/js/d3plus-hierarchy.v0.8.full.min.js"></script>
+<script src="https://d3plus.org/js/d3plus-hierarchy.v0.9.full.min.js"></script>
 ```
 
 
@@ -47,6 +47,7 @@ Colors are assigned to each unique ID using the color [assign](http://d3plus.org
 
 ### More Examples
 
+ * [Using Custom Aggregations with Thresholding](http://d3plus.org/examples/d3plus-hierarchy/aggs-threshold/)<sup> ***New***</sup>
  * [Changing the Treemap Tiling Method](http://d3plus.org/examples/d3plus-hierarchy/treemap-as-single-stacked-bar-chart/)
  * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
  * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)
@@ -393,4 +394,4 @@ This is a global function.
 
 
 
-###### <sub>Documentation generated on Wed, 19 Feb 2020 14:07:49 GMT</sub>
+###### <sub>Documentation generated on Wed, 15 Jul 2020 14:58:49 GMT</sub>
