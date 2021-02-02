@@ -34,7 +34,7 @@ export default class Treemap extends Viz {
         return `${rank}${this._drawLabel(d, i)}, ${this._sum(d, i)}.`;
       },
       labelConfig: {
-        fontMax: 20,
+        fontMax: 40,
         fontMin: 8,
         fontResize: true,
         padding: 5
@@ -114,6 +114,7 @@ export default class Treemap extends Viz {
 
     const transform = `translate(${this._margin.left}, ${this._margin.top})`;
     const rectConfig = configPrep.bind(this)(this._shapeConfig, "shape", "Rect");
+    const fontMax = rectConfig.labelConfig.fontMax;
     const fontMin = rectConfig.labelConfig.fontMin;
     const padding = rectConfig.labelConfig.padding;
 
@@ -132,7 +133,7 @@ export default class Treemap extends Viz {
         height: d => d.y1 - d.y0,
         labelBounds: (d, i, s) => {
           const h = s.height;
-          let sh = Math.min(50, (h - padding * 2) * 0.5);
+          let sh = Math.min(fontMax, (h - padding * 2) * 0.5);
           if (sh < fontMin) sh = 0;
           return [
             {width: s.width, height: h - sh, x: -s.width / 2, y: -h / 2},
