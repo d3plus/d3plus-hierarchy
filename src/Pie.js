@@ -21,6 +21,7 @@ export default class Pie extends Viz {
 
     super();
 
+    const defaultLegend = this._legend;
     this._legend = (config, arr) => {
       if (arr.length === this._filteredData.length) return false;
       return defaultLegend.bind(this)(config, arr);
