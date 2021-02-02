@@ -39,11 +39,18 @@ export default class Pack extends Viz {
     super();
 
     this._layoutPadding = 1;
+
+    const defaultLegend = this._legend;
+    this._legend = (config, arr) => {
+      if (arr.length === this._filteredData.length) return false;
+      return defaultLegend.bind(this)(config, arr);
+    };
+
     this._on.mouseenter = () => {};
 
     const defaultMouseMoveLegend = this._on["mousemove.legend"];
-    this._on["mousemove.legend"] = (d, i) => {
-      defaultMouseMoveLegend(d, i);
+    this._on["mousemove.legend"] = (d, i, x, event) => {
+      defaultMouseMoveLegend(d, i, x, event);
 
       const ids = this._ids(d, i);
       const hoverData = recursionCircles(d);
@@ -59,8 +66,8 @@ export default class Pack extends Viz {
 
     };
     const defaultMouseMoveShape = this._on["mousemove.shape"];
-    this._on["mousemove.shape"] = (d, i) => {
-      if (d.__d3plusTooltip__) defaultMouseMoveShape(d, i);
+    this._on["mousemove.shape"] = (d, i, x, event) => {
+      if (d.__d3plusTooltip__) defaultMouseMoveShape(d, i, x, event);
       this.hover(h => recursionCircles(d, [d]).includes(h));
     };
     this._pack = pack();
