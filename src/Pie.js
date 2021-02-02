@@ -21,6 +21,12 @@ export default class Pie extends Viz {
 
     super();
 
+    this._legend = (config, arr) => {
+      if (arr.length === this._filteredData.length) return false;
+      return defaultLegend.bind(this)(config, arr);
+    };
+    this._legendSort = (a, b) => this._value(b) - this._value(a);
+
     this._shapeConfig = assign(this._shapeConfig, {
       ariaLabel: (d, i) =>  this._pieData ? `${++this._pieData[i].index}. ${this._drawLabel(d, i)}, ${this._value(d, i)}.` : "",
       Path: {
