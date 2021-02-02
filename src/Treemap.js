@@ -169,6 +169,7 @@ export default class Treemap extends Viz {
   /**
    * Applies the threshold algorithm for Treemaps.
    * @param {Array} data The data to process.
+   * @private
    */
   _thresholdFunction(data) {
     const aggs = this._aggs;
