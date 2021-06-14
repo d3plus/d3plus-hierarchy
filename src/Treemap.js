@@ -1,6 +1,8 @@
 import {sum} from "d3-array";
 import {nest} from "d3-collection";
-import {hierarchy, treemap, treemapSquarify} from "d3-hierarchy";
+import {hierarchy, treemap} from "d3-hierarchy";
+import {treemapBinary, treemapDice, treemapSlice, treemapSliceDice, treemapSquarify, treemapResquarify} from "d3-hierarchy";
+const tileMethods = {treemapBinary, treemapDice, treemapSlice, treemapSliceDice, treemapSquarify, treemapResquarify};
 
 import {accessor, assign, configPrep, constant, elem, merge} from "d3plus-common";
 import {formatAbbreviate} from "d3plus-format";
@@ -286,11 +288,17 @@ function sum(d) {
 
   /**
       @memberof Treemap
-      @desc If *value* is specified, sets the [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling) to the specified function and returns the current class instance. If *value* is not specified, returns the current [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling).
-      @param {Function} [*value*]
+      @desc Sets the tiling method used when calcuating the size and position of the rectangles.
+
+Can either be a string referring to a d3-hierarchy [tiling method](https://github.com/d3/d3-hierarchy#treemap-tiling), or a custom function in the same format.
+      @param {String|Function} [*value* = "squarify"]
   */
   tile(_) {
-    return arguments.length ? (this._tile = _, this) : this._tile;
+    return arguments.length
+      ? (this._tile = typeof _ === "string"
+        ? tileMethods[`treemap${_.charAt(0).toUpperCase()}${_.slice(1)}`] || treemapSquarify
+        : _, this)
+      : this._tile;
   }
 
 }
