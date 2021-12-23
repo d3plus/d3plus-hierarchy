@@ -25,12 +25,29 @@ export default class Tree extends Viz {
     super();
 
     this._orient = "vertical";
+
+    /* this._on.mouseenter = function() {};
+
+    this._on["mouseleave.shape"] = () => {
+      this.hover(false);
+    };
+
+    const defaultMouseMove = this._on["mousemove.shape"];
+
+    this._on["mousemove.shape"] = (d, i, x, event) => {
+      defaultMouseMove(d, i, x, event);
+      const id = this._ids(d, i).slice(0, x.depth).join("-");
+
+      this.hover((h, x) => id === this._ids(h, x).slice(0, x.depth).join("-"));
+    };*/
+  
     this._separation = (a, b) => a.parent === b.parent ? 1 : 2;
 
     this._shape = constant("Circle");
     this._shapeConfig = assign(this._shapeConfig, {
       ariaLabel: (d, i) =>  this._treeData ? `${this._treeData[i].depth}. ${this._drawLabel(d, i)}.` : "",
       labelConfig: {
+        duration: 0,
         fontColor: "#444"
       },
       Path: {
@@ -55,7 +72,8 @@ export default class Tree extends Viz {
 
     super._draw(callback);
 
-    const height = this._orient === "vertical"
+    const duration = this._duration,
+          height = this._orient === "vertical"
             ? this._height - this._margin.top - this._margin.bottom
             : this._width - this._margin.left - this._margin.right,
           left = this._orient === "vertical" ? "left" : "top",
@@ -120,7 +138,7 @@ export default class Tree extends Viz {
       else d.y = val;
     });
 
-    const elemObject = {parent: this._select, enter: {transform}, update: {transform}};
+    const elemObject = {parent: this._select, duration, enter: {transform}, update: {transform}};
 
     this._shapes.push(new Path()
       .data(treeData.filter(d => d.depth > 1))
@@ -143,7 +161,7 @@ export default class Tree extends Viz {
             : `M${x},${y}C${(x + px) / 2},${y} ${(x + px) / 2},${py} ${px},${py}`;
 
         },
-        id: (d, i) => this._ids(d, i).join("-")
+        id: (d, i) => this._ids(d, i).slice(0, d.depth).join("-")
       })
       .render());
 
@@ -152,16 +170,15 @@ export default class Tree extends Viz {
       .select(elem("g.d3plus-Tree-Shapes", elemObject).node())
       .config(configPrep.bind(this)(this._shapeConfig, "shape", "Circle"))
       .config({
-        id: (d, i) => this._ids(d, i).join("-"),
+        id: (d, i) => this._ids(d, i).slice(0, d.depth).join("-"),
         label: (d, i) => {
           if (this._label) return this._label(d.data, i);
           const ids = this._ids(d, i).slice(0, d.depth);
           return ids[ids.length - 1];
         },
         labelConfig: {
-          textAnchor: d => this._orient === "vertical" ? "middle"
-          : d.data.children && d.data.depth !== this._groupBy.length ? "end" : "start",
-          verticalAlign: d => this._orient === "vertical" ? d.data.depth === 1 ? "bottom" : "top" : "middle"
+          textAnchor: (d, i, s) => this._orient === "vertical" ? "middle" : s.children && s.depth !== this._groupBy.length ? "end" : "start",
+          verticalAlign: (d, i, s) => this._orient === "vertical" ? s.depth === 1 ? "bottom" : "top" : "middle"
         },
         hitArea: (d, i, s) => {
 
