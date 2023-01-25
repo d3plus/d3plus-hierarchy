@@ -1,6 +1,6 @@
 {
   "name": "d3plus-hierarchy",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Nested, hierarchical, and cluster charts built on D3",
   "main": "es/index.js",
   "jsnext:main": "es/index",
