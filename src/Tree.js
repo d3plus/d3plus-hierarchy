@@ -6,7 +6,7 @@ import {assign, configPrep, constant, elem, merge} from "d3plus-common";
 import {Circle, Path} from "d3plus-shape";
 import {Viz} from "d3plus-viz";
 
-import {default as nest} from "./nest";
+import {default as nest} from "./nest.js";
 
 /**
     @class Tree
@@ -67,11 +67,12 @@ export default class Tree extends Viz {
 
     const treeData = this._treeData = this._tree
       .separation(this._separation)
-      .size([width, height])
-      (hierarchy({
-        key: "root",
-        values: nest(this._filteredData, this._groupBy.slice(0, this._drawDepth + 1))
-      }, d => d.key && d.values ? d.values : null).sort(this._sort))
+      .size([width, height])(
+        hierarchy({
+          key: "root",
+          values: nest(this._filteredData, this._groupBy.slice(0, this._drawDepth + 1))
+        }, d => d.key && d.values ? d.values : null).sort(this._sort)
+      )
       .descendants()
       .filter(d => d.depth <= this._groupBy.length && d.parent);
 

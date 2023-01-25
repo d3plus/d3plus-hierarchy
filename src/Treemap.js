@@ -86,8 +86,7 @@ export default class Treemap extends Viz {
         this._width - this._margin.left - this._margin.right,
         this._height - this._margin.top - this._margin.bottom
       ])
-      .tile(this._tile)
-      (hierarchy({values: nestedData}, d => d.values).sum(this._sum).sort(this._sort));
+      .tile(this._tile)(hierarchy({values: nestedData}, d => d.values).sum(this._sum).sort(this._sort));
 
     const shapeData = [], that = this;
 

@@ -60,8 +60,7 @@ export default class Pie extends Viz {
     const pieData = this._pieData = this._pie
       .padAngle(this._padAngle || this._padPixel / outerRadius)
       .sort(this._sort)
-      .value(this._value)
-      (this._filteredData);
+      .value(this._value)(this._filteredData);
 
     pieData.forEach((d, i) => {
       d.__d3plus__ = true;

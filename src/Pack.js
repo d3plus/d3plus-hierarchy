@@ -106,8 +106,9 @@ export default class Pack extends Viz {
 
     const packData = this._pack
       .padding(this._layoutPadding)
-      .size([diameter, diameter])
-      (hierarchy({key: nestedData.key, values: nestedData}, d => d.values).sum(this._sum).sort(this._sort))
+      .size([diameter, diameter])(
+        hierarchy({key: nestedData.key, values: nestedData}, d => d.values).sum(this._sum).sort(this._sort)
+      )
       .descendants();
 
     packData.forEach((d, i) => {

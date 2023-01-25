@@ -1,5 +1,5 @@
 import {min} from "d3-array";
-import {default as Pie} from "./Pie";
+import {default as Pie} from "./Pie.js";
 
 /**
     @class Donut
