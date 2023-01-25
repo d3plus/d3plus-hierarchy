@@ -1,12 +1,16 @@
 # d3plus-hierarchy
 
-[![NPM Release](http://img.shields.io/npm/v/d3plus-hierarchy.svg?style=flat)](https://www.npmjs.org/package/d3plus-hierarchy) [![Build Status](https://travis-ci.org/d3plus/d3plus-hierarchy.svg?branch=master)](https://travis-ci.org/d3plus/d3plus-hierarchy) [![Dependency Status](http://img.shields.io/david/d3plus/d3plus-hierarchy.svg?style=flat)](https://david-dm.org/d3plus/d3plus-hierarchy) [![Gitter](https://img.shields.io/badge/-chat_on_gitter-brightgreen.svg?style=flat&logo=gitter-white)](https://gitter.im/d3plus/)
-
 Nested, hierarchical, and cluster charts built on D3
 
 ## Installing
 
-If you use NPM, `npm install d3plus-hierarchy`. Otherwise, download the [latest release](https://github.com/d3plus/d3plus-hierarchy/releases/latest). You can also load d3plus-hierarchy as a standalone library or as part of [D3plus](https://github.com/d3plus/d3plus). ES modules, AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3plus` global is exported:
+If using npm, `npm install d3plus-hierarchy`. Otherwise, you can download the [latest release from GitHub](https://github.com/d3plus/d3plus-hierarchy/releases/latest) or load from a [CDN](https://cdn.jsdelivr.net/npm/d3plus-hierarchy@1).
+
+```js
+import modules from "d3plus-hierarchy";
+```
+
+d3plus-hierarchy can be loaded as a standalone library or bundled as part of [D3plus](https://github.com/d3plus/d3plus). ES modules, AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3plus` global is exported:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3plus-hierarchy@1"></script>
@@ -15,54 +19,9 @@ If you use NPM, `npm install d3plus-hierarchy`. Otherwise, download the [latest 
 </script>
 ```
 
+## Examples
 
-## Simple Tree Map
-
-Creating a tree map using d3plus is super simple. Given an array of data objects that looks something like this:
-
-```js
-var data = [
-  {parent: "Group 1", id: "alpha", value: 29},
-  {parent: "Group 1", id: "beta", value: 10},
-  {parent: "Group 1", id: "gamma", value: 2},
-  {parent: "Group 2", id: "delta", value: 29},
-  {parent: "Group 2", id: "eta", value: 25}
-];
-```
-
-Only a few lines of code are needed to transform it into an interactive [TreeMap](http://d3plus.org/docs/#Treemap):
-
-```js
-new d3plus.Treemap()
-  .data(data)
-  .groupBy(["parent", "id"])
-  .sum("value")
-  .render();
-```
-
-Colors are assigned to each unique ID using the color [assign](http://d3plus.org/docs/#assign) function, and the rectangles are created using the [Rect](http://d3plus.org/docs/#Rect) class.
-
-
-[<kbd><img src="/example/getting-started.png" width="990px" /></kbd>](https://d3plus.org/examples/d3plus-hierarchy/getting-started/)
-
-[Click here](https://d3plus.org/examples/d3plus-hierarchy/getting-started/) to view this example live on the web.
-
-
-### More Examples
-
- * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)
- * [Changing the Treemap Tiling Method](http://d3plus.org/examples/d3plus-hierarchy/treemap-as-single-stacked-bar-chart/)
- * [Pie Chart](http://d3plus.org/examples/d3plus-hierarchy/pie-chart/)
- * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
- * [Pie Chart Tooltip](http://d3plus.org/examples/d3plus-hierarchy/pie-chart-tooltip/)
- * [Pie Chart Grouping](http://d3plus.org/examples/d3plus-hierarchy/pie-chart-multigrouping/)
- * [Hiding Tooltip on Click](http://d3plus.org/examples/d3plus-hierarchy/hiding-tooltip-on-click/)
- * [Custom Mouse Events](http://d3plus.org/examples/d3plus-hierarchy/mouse-events/)
- * [Circle Packing Chart](http://d3plus.org/examples/d3plus-hierarchy/pack/)
- * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)
- * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
- * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)
- * [Using Custom Aggregations with Thresholding](http://d3plus.org/examples/d3plus-hierarchy/aggs-threshold/)
+Live examples can be found on [d3plus.org](https://d3plus.org/), which includes a collection of example visualizations using [d3plus-react](https://github.com/d3plus/d3plus-react/). These examples are powered by the [d3plus-storybook](https://github.com/d3plus/d3plus-storybook/) repo, and PRs are always welcome. :beers:
 
 ## API Reference
 
@@ -115,7 +74,7 @@ Uses the [d3 pack layout](https://github.com/d3/d3-hierarchy#pack) to creates Ci
 
 
 
-<a name="Pack.hover" href="#Pack.hover">#</a> Pack.**hover**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L144)
+<a name="Pack.hover" href="#Pack.hover">#</a> Pack.**hover**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L145)
 
 If *value* is specified, sets the hover method to the specified function and returns the current class instance.
 
@@ -123,7 +82,7 @@ If *value* is specified, sets the hover method to the specified function and ret
 This is a static method of [<code>Pack</code>](#Pack), and is chainable with other methods of this Class.
 
 
-<a name="Pack.layoutPadding" href="#Pack.layoutPadding">#</a> Pack.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L157)
+<a name="Pack.layoutPadding" href="#Pack.layoutPadding">#</a> Pack.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L158)
 
 If *value* is specified, sets the opacity accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current pack opacity accessor.
 
@@ -131,7 +90,7 @@ If *value* is specified, sets the opacity accessor to the specified function or 
 This is a static method of [<code>Pack</code>](#Pack).
 
 
-<a name="Pack.packOpacity" href="#Pack.packOpacity">#</a> Pack.**packOpacity**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L166)
+<a name="Pack.packOpacity" href="#Pack.packOpacity">#</a> Pack.**packOpacity**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L167)
 
 If *value* is specified, sets the padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current pack opacity accessor.
 
@@ -139,7 +98,7 @@ If *value* is specified, sets the padding accessor to the specified function or 
 This is a static method of [<code>Pack</code>](#Pack).
 
 
-<a name="Pack.sort" href="#Pack.sort">#</a> Pack.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L179)
+<a name="Pack.sort" href="#Pack.sort">#</a> Pack.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L180)
 
 If *comparator* is specified, sets the sort order for the pack using the specified comparator function. If *comparator* is not specified, returns the current group sort order, which defaults to descending order by the associated input data's numeric value attribute.
 
@@ -154,7 +113,7 @@ function comparator(a, b) {
 ```
 
 
-<a name="Pack.sum" href="#Pack.sum">#</a> Pack.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L193)
+<a name="Pack.sum" href="#Pack.sum">#</a> Pack.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pack.js#L194)
 
 If *value* is specified, sets the sum accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current sum accessor.
 
@@ -194,7 +153,7 @@ Uses the [d3 pie layout](https://github.com/d3/d3-shape#pies) to creates SVG arc
 
 
 
-<a name="Pie.innerRadius" href="#Pie.innerRadius">#</a> Pie.**innerRadius**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L101)
+<a name="Pie.innerRadius" href="#Pie.innerRadius">#</a> Pie.**innerRadius**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L100)
 
 If *value* is specified, sets the inner radius accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current inner radius accessor.
 
@@ -202,7 +161,7 @@ If *value* is specified, sets the inner radius accessor to the specified functio
 This is a static method of [<code>Pie</code>](#Pie).
 
 
-<a name="Pie.padAngle" href="#Pie.padAngle">#</a> Pie.**padAngle**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L110)
+<a name="Pie.padAngle" href="#Pie.padAngle">#</a> Pie.**padAngle**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L109)
 
 If *value* is specified, sets the arc padding to the specified radian value and returns the current class instance. If *value* is not specified, returns the current radian padding.
 
@@ -210,7 +169,7 @@ If *value* is specified, sets the arc padding to the specified radian value and 
 This is a static method of [<code>Pie</code>](#Pie).
 
 
-<a name="Pie.padPixel" href="#Pie.padPixel">#</a> Pie.**padPixel**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L119)
+<a name="Pie.padPixel" href="#Pie.padPixel">#</a> Pie.**padPixel**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L118)
 
 If *value* is specified, sets the arc padding to the specified pixel value and returns the current class instance. If *value* is not specified, returns the current pixel padding.
 
@@ -218,7 +177,7 @@ If *value* is specified, sets the arc padding to the specified pixel value and r
 This is a static method of [<code>Pie</code>](#Pie).
 
 
-<a name="Pie.sort" href="#Pie.sort">#</a> Pie.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L132)
+<a name="Pie.sort" href="#Pie.sort">#</a> Pie.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L131)
 
 If *comparator* is specified, sets the sort order for the pie slices using the specified comparator function. If *comparator* is not specified, returns the current sort order, which defaults to descending order by the associated input data's numeric value attribute.
 
@@ -233,7 +192,7 @@ function comparator(a, b) {
 ```
 
 
-<a name="Pie.value" href="#Pie.value">#</a> Pie.**value**(*value*) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L145)
+<a name="Pie.value" href="#Pie.value">#</a> Pie.**value**(*value*) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Pie.js#L144)
 
 If *value* is specified, sets the value accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current value accessor.
 
@@ -270,7 +229,7 @@ Uses d3's [tree layout](https://github.com/d3/d3-hierarchy#tree) to create a tid
 
 
 
-<a name="Tree.orient" href="#Tree.orient">#</a> Tree.**orient**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Tree.js#L208)
+<a name="Tree.orient" href="#Tree.orient">#</a> Tree.**orient**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Tree.js#L209)
 
 If *value* is specified, sets the orientation to the specified value. If *value* is not specified, returns the current orientation.
 
@@ -278,7 +237,7 @@ If *value* is specified, sets the orientation to the specified value. If *value*
 This is a static method of [<code>Tree</code>](#Tree).
 
 
-<a name="Tree.separation" href="#Tree.separation">#</a> Tree.**separation**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Tree.js#L224)
+<a name="Tree.separation" href="#Tree.separation">#</a> Tree.**separation**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Tree.js#L225)
 
 If *value* is specified, sets the separation accessor to the specified function. If *value* is not specified, returns the current separation accessor.
 
@@ -320,7 +279,7 @@ Uses the [d3 treemap layout](https://github.com/mbostock/d3/wiki/Treemap-Layout)
 
 
 
-<a name="Treemap.layoutPadding" href="#Treemap.layoutPadding">#</a> Treemap.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L254)
+<a name="Treemap.layoutPadding" href="#Treemap.layoutPadding">#</a> Treemap.**layoutPadding**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L253)
 
 If *value* is specified, sets the inner and outer padding accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current padding accessor.
 
@@ -328,7 +287,7 @@ If *value* is specified, sets the inner and outer padding accessor to the specif
 This is a static method of [<code>Treemap</code>](#Treemap).
 
 
-<a name="Treemap.sort" href="#Treemap.sort">#</a> Treemap.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L267)
+<a name="Treemap.sort" href="#Treemap.sort">#</a> Treemap.**sort**([*comparator*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L266)
 
 If *comparator* is specified, sets the sort order for the treemap using the specified comparator function. If *comparator* is not specified, returns the current group sort order, which defaults to descending order by the associated input data's numeric value attribute.
 
@@ -343,7 +302,7 @@ function comparator(a, b) {
 ```
 
 
-<a name="Treemap.sum" href="#Treemap.sum">#</a> Treemap.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L280)
+<a name="Treemap.sum" href="#Treemap.sum">#</a> Treemap.**sum**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L279)
 
 If *value* is specified, sets the sum accessor to the specified function or number and returns the current class instance. If *value* is not specified, returns the current sum accessor.
 
@@ -358,7 +317,7 @@ function sum(d) {
 ```
 
 
-<a name="Treemap.tile" href="#Treemap.tile">#</a> Treemap.**tile**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L296)
+<a name="Treemap.tile" href="#Treemap.tile">#</a> Treemap.**tile**([*value*]) [<>](https://github.com/d3plus/d3plus-hierarchy/blob/master/src/Treemap.js#L295)
 
 Sets the tiling method used when calcuating the size and position of the rectangles.
 
@@ -371,4 +330,4 @@ This is a static method of [<code>Treemap</code>](#Treemap).
 
 
 
-###### <sub>Documentation generated on Mon, 14 Jun 2021 17:16:57 GMT</sub>
+###### <sub>Documentation generated on Wed, 25 Jan 2023 18:05:43 GMT</sub>
