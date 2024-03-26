@@ -15,55 +15,6 @@ If you use NPM, `npm install d3plus-hierarchy`. Otherwise, download the [latest 
 </script>
 ```
 
-
-## Simple Tree Map
-
-Creating a tree map using d3plus is super simple. Given an array of data objects that looks something like this:
-
-```js
-var data = [
-  {parent: "Group 1", id: "alpha", value: 29},
-  {parent: "Group 1", id: "beta", value: 10},
-  {parent: "Group 1", id: "gamma", value: 2},
-  {parent: "Group 2", id: "delta", value: 29},
-  {parent: "Group 2", id: "eta", value: 25}
-];
-```
-
-Only a few lines of code are needed to transform it into an interactive [TreeMap](http://d3plus.org/docs/#Treemap):
-
-```js
-new d3plus.Treemap()
-  .data(data)
-  .groupBy(["parent", "id"])
-  .sum("value")
-  .render();
-```
-
-Colors are assigned to each unique ID using the color [assign](http://d3plus.org/docs/#assign) function, and the rectangles are created using the [Rect](http://d3plus.org/docs/#Rect) class.
-
-
-[<kbd><img src="/example/getting-started.png" width="990px" /></kbd>](https://d3plus.org/examples/d3plus-hierarchy/getting-started/)
-
-[Click here](https://d3plus.org/examples/d3plus-hierarchy/getting-started/) to view this example live on the web.
-
-
-### More Examples
-
- * [Custom Tooltip Contents](http://d3plus.org/examples/d3plus-hierarchy/tooltip-contents/)
- * [Changing the Treemap Tiling Method](http://d3plus.org/examples/d3plus-hierarchy/treemap-as-single-stacked-bar-chart/)
- * [Pie Chart](http://d3plus.org/examples/d3plus-hierarchy/pie-chart/)
- * [Rendering into a Specific DOM Container](http://d3plus.org/examples/d3plus-hierarchy/selecting-container/)
- * [Pie Chart Tooltip](http://d3plus.org/examples/d3plus-hierarchy/pie-chart-tooltip/)
- * [Pie Chart Grouping](http://d3plus.org/examples/d3plus-hierarchy/pie-chart-multigrouping/)
- * [Hiding Tooltip on Click](http://d3plus.org/examples/d3plus-hierarchy/hiding-tooltip-on-click/)
- * [Custom Mouse Events](http://d3plus.org/examples/d3plus-hierarchy/mouse-events/)
- * [Circle Packing Chart](http://d3plus.org/examples/d3plus-hierarchy/pack/)
- * [Changing Font Styles](http://d3plus.org/examples/d3plus-hierarchy/custom-font/)
- * [Defining Custom Colors for a Visualization](http://d3plus.org/examples/d3plus-hierarchy/custom-color/)
- * [Adding Background Images to Shapes](http://d3plus.org/examples/d3plus-hierarchy/background-image/)
- * [Using Custom Aggregations with Thresholding](http://d3plus.org/examples/d3plus-hierarchy/aggs-threshold/)
-
 ## API Reference
 
 ##### 
@@ -371,4 +322,4 @@ This is a static method of [<code>Treemap</code>](#Treemap).
 
 
 
-###### <sub>Documentation generated on Mon, 14 Jun 2021 17:16:57 GMT</sub>
+###### <sub>Documentation generated on Tue, 26 Mar 2024 17:46:41 GMT</sub>
