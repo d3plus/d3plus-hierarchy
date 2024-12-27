@@ -20,12 +20,7 @@ export default class Pie extends Viz {
   constructor() {
 
     super();
-
-    const defaultLegend = this._legend;
-    this._legend = (config, arr) => {
-      if (arr.length === this._filteredData.length) return false;
-      return defaultLegend.bind(this)(config, arr);
-    };
+    
     this._legendSort = (a, b) => this._value(b) - this._value(a);
 
     this._shapeConfig = assign(this._shapeConfig, {

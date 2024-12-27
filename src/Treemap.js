@@ -27,11 +27,6 @@ export default class Treemap extends Viz {
 
     this._layoutPadding = 1;
 
-    const defaultLegend = this._legend;
-    this._legend = (config, arr) => {
-      if (arr.length === this._filteredData.length) return false;
-      return defaultLegend.bind(this)(config, arr);
-    };
     this._legendSort = (a, b) => this._sum(b) - this._sum(a);
     this._legendTooltip = assign({}, this._legendTooltip, {
       tbody: []

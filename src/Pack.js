@@ -40,12 +40,6 @@ export default class Pack extends Viz {
 
     this._layoutPadding = 1;
 
-    const defaultLegend = this._legend;
-    this._legend = (config, arr) => {
-      if (arr.length === this._filteredData.length) return false;
-      return defaultLegend.bind(this)(config, arr);
-    };
-
     this._on.mouseenter = () => {};
 
     const defaultMouseMoveLegend = this._on["mousemove.legend"];
